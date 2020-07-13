@@ -17,6 +17,7 @@
         <el-menu-item index="3">消息</el-menu-item>
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
+        <el-menu-item index="6">足迹</el-menu-item>
       </el-menu>
     </el-header>
 <!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
@@ -157,8 +158,24 @@ import {mapState} from 'vuex'
       },
       goAddItem(){
         this.$router.push({name:'AddItem'})
-      }
+      },
+      handleSelect(key, keyPath) {
+        // console.log(key,keyPath);
+        if(key==='1')
+          this.$router.push({name: 'Home'});
+        else if(key==='2')
+          this.$router.push({name:'AddItem'});
+        else if(key==='3')
+          this.$router.push({name:'Message'});
+        else if(key==='4')
+          this.$router.push({name:'Application'});
+        else if(key==='5')
+          this.$router.push({name:'Zone'});
+        else if(key==='6')
+          this.$router.push({name:'Footprint'});
+      },
     },
+
     created () {
       // console.log(this.$route.query.itemId)
       this.itemId=this.$route.params.itemId;

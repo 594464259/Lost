@@ -17,6 +17,7 @@
         <el-menu-item index="3">消息</el-menu-item>
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
+        <el-menu-item index="6">足迹</el-menu-item>
       </el-menu>
     </el-header>
 <!--    <div class="header">-->
@@ -219,7 +220,9 @@
         else if(key==='4')
           this.$router.push({name:'Application'});
         else if(key==='5')
-          this.$router.push({name:'Zone'})
+          this.$router.push({name:'Zone'});
+        else if(key==='6')
+          this.$router.push({name:'Footprint'});
       },
       transferTime:function(cTime){
 

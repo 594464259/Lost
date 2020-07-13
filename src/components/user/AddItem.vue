@@ -17,6 +17,7 @@
         <el-menu-item index="3">消息</el-menu-item>
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
+        <el-menu-item index="6">足迹</el-menu-item>
       </el-menu>
     </el-header>
 <!--    <div class="header">-->
@@ -48,13 +49,13 @@
     <div>
 
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="物品 类型" prop="type">
-          <el-radio-group v-model="ruleForm.type">
-            <!-- <el-radio v-for="item in type" :key="item.key" :label="item.key">{{item.value}}</el-radio> -->
-            <el-radio label="0">拾取</el-radio>
-            <el-radio label="1">遗失</el-radio>
-          </el-radio-group>
-        </el-form-item>
+<!--        <el-form-item label="物品 类型" prop="type">-->
+<!--          <el-radio-group v-model="ruleForm.type">-->
+<!--            &lt;!&ndash; <el-radio v-for="item in type" :key="item.key" :label="item.key">{{item.value}}</el-radio> &ndash;&gt;-->
+<!--            <el-radio label="0">拾取</el-radio>-->
+<!--            <el-radio label="1">遗失</el-radio>-->
+<!--          </el-radio-group>-->
+<!--        </el-form-item>-->
         <el-form-item label="物品 名称" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
@@ -256,7 +257,9 @@
         else if(key==='4')
           this.$router.push({name:'Application'});
         else if(key==='5')
-          this.$router.push({name:'Zone'})
+          this.$router.push({name:'Zone'});
+        else if(key==='6')
+          this.$router.push({name:'Footprint'});
       },
     }
   }
