@@ -1,24 +1,43 @@
 <template>
   <div class="page" >
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <ul class="navbar-nav">
-        <li>
-          <a class="navbar-brand" href="#">LANDF</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goHome">首页</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goMessage">消息</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">积分明细</a>
-        </li>
-      </ul>
-    </nav>
+    <el-header style="padding: 0 0;">
+
+      <!--      <div class="line"></div>-->
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="2">拾遗</el-menu-item>
+        <el-menu-item index="3">消息</el-menu-item>
+        <el-menu-item index="4">申请</el-menu-item>
+        <el-menu-item index="5">资料</el-menu-item>
+      </el-menu>
+    </el-header>
+<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li>-->
+<!--          <a class="navbar-brand" href="#">LANDF</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goHome">首页</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
     <div class="container-fluid bg " >
       <h1 style="padding-top: 50px; color: #007bff;">LANDF</h1>
     </div>
@@ -98,15 +117,16 @@ import {mapState} from 'vuex'
     name: 'Detail',
     data:function () {
       return{
+        activeIndex: '0',
         username:'',
         credit:'',
-        
+        itemId:'',
         item: {
           // id:'5',
           // name:'英语课本',
           // details:'在图书馆捡到的',
           // time:'2020-3-15'
-          thingId:'',
+          id:'',
           name:'',
           address:'',
           reward:'',
@@ -120,15 +140,14 @@ import {mapState} from 'vuex'
     },
     methods:{
       myInit(){
-        // console.log("yigei ")
-        this.axios({
-          method:'GET',
-          url:'/api/user/'+this.$store.state.id,
-        }).then(res=>{
-          // console.log(res.data)
-          this.username=res.data.username
-          this.credit=res.data.rewards
-        })        
+        // this.axios({
+        //   method:'GET',
+        //   url:'/api/user/'+this.$store.state.id,
+        // }).then(res=>{
+        //   // console.log(res.data)
+        //   this.username=res.data.username
+        //   this.credit=res.data.rewards
+        // })
       },
       goHome(){
         this.$router.push({name:'Home'})
@@ -141,11 +160,13 @@ import {mapState} from 'vuex'
       }
     },
     created () {
+      // console.log(this.$route.query.itemId)
+      this.itemId=this.$route.params.itemId;
       this.myInit()
       // window.document.body.style.backgroundColor = 'rgba(254, 237, 186, 0.64)'
     },
     computed:mapState({
-      id: state=>state.id
+      // id: state=>state.id
     })
   }
 </script>

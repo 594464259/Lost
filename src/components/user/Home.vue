@@ -1,29 +1,48 @@
 <template>
   <div class="page" >
-    <div class="header">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <ul class="navbar-nav">
-        <li>
-          <a class="navbar-brand" href="#">LANDF</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">首页</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goMessage">消息</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">积分明细</a>
-        </li>
-      </ul>
-    </nav>
+    <el-header style="padding: 0 0;">
+
+      <!--      <div class="line"></div>-->
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="2">拾遗</el-menu-item>
+        <el-menu-item index="3">消息</el-menu-item>
+        <el-menu-item index="4">申请</el-menu-item>
+        <el-menu-item index="5">资料</el-menu-item>
+      </el-menu>
+    </el-header>
+<!--    <div class="header">-->
+<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li>-->
+<!--          <a class="navbar-brand" href="#">LANDF</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item active">-->
+<!--          <a class="nav-link" href="#">首页</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
     <div class="container-fluid bg " >
       <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
     </div>
-  </div>
+<!--  </div>-->
   <el-row :gutter="0">
     <div class="myContainer">
     <el-col :span="5" style="height: 100%;">
@@ -42,24 +61,25 @@
     </el-col>
     <el-col :span="14">
     <div class="things" style="position: relative;">
-      <div class="card" v-for="item in items" :key="item.thingId" style="margin-top: 30px;">
+      <div class="card" v-for="item in items" :key="item.Id" style="margin-top: 30px;">
         <div class="card-body" style="text-align: start">
           <!-- <h4 class="card-title"><a href="javascript:void(0)">{{item.name}}</a></h4> -->
-          <h3 class="card-titile"><a class="card-link" href="javascript:void(0)"  @click="goDetail" style="color:black;">{{item.name}}</a></h3>
+          <h3 class="card-titile"><a class="card-link" href="javascript:void(0)"  @click="goDetail(item.id)" style="color:black;">{{item.name}}</a></h3>
           <br>
           <p><a v-html="item.details"></a></p>
-          <small>{{transferTime(item.time)}}</small>
+          <small>{{item.time}}</small>
+<!--          <small>{{transferTime(item.time)}}</small>-->
           <!-- <a href="javascript:void(0)" class="card-link">{{transferTime(item.time)}}</a>  -->
           <!-- <a href="javascript:void(0)" class="card-link">{{item.thingid}}</a> -->
 
         </div>
       </div>
-    </div>      
+    </div>
     </el-col>
     <el-col :span="5">
     <div id="demo" class="carousel slide" data-ride="carousel" style="">
 
-  
+
       <ul class="carousel-indicators">
         <li data-target="#demo" data-slide-to="0" class="active"></li>
         <li data-target="#demo" data-slide-to="1"></li>
@@ -121,45 +141,14 @@
     name: 'Home',
     data:function () {
       return{
+        activeIndex: '1',
         id:'',
         username:'请登录',
         credit:0,
         items:[],
-// {
-//           id: 1,
-//           name: '智能手机',
-//           details: '黑色的',
-//           time: '2020-5-20'
-//         },{
-//           id: 2,
-//           name: '羽毛球牌',
-//           details: '<img src="https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png">',
-//           time: '2020-5-11'
-//         },{
-//           id:3,
-//           name:'海豹',
-//           details: '该杀',
-//           time: '2020-5-10'
-//         },
-//         {
-//           id: 4,
-//           name: '智能手机',
-//           details: '黑色的',
-//           time: '2020-5-20'
-//         },{
-//           id: 5,
-//           name: '羽毛球牌',
-//           details: '<img src="https://i0.hdslb.com/bfs/archive/e62b6b095ef38dfb742687f11e4b570dde420b5d.png">',
-//           time: '2020-5-11'
-//         },{
-//           id:6,
-//           name:'海豹',
-//           details: '该杀',
-//           time: '2020-5-10'
-//         }
         page: 1,
         limit: 10,
-        
+
         currentPage:1,
       }
     },
@@ -192,17 +181,18 @@
           this.credit=res.data.rewards
         })
       },
-      goAddItem:function() {
+      //
+      // goAddItem:function() {
+      //   // this.$store.dispatch('getUser',this.$store.state.id)
+      //   this.$router.push({name:'AddItem'})
+      // },
+      // goMessage:function() {
+      //   // this.$store.dispatch('getUser',this.$store.state.id)
+      //   this.$router.push({name:'Message'})
+      // },
+      goDetail(itemId){
         // this.$store.dispatch('getUser',this.$store.state.id)
-        this.$router.push({name:'AddItem'})
-      },
-      goMessage:function() {
-        // this.$store.dispatch('getUser',this.$store.state.id)
-        this.$router.push({name:'Message'})
-      },
-      goDetail(){
-        // this.$store.dispatch('getUser',this.$store.state.id)
-        this.$router.push({name:'Detail'})
+        this.$router.push({name:'Detail',params:{itemId:itemId}})
       },
       changePage:function (currentPage) {
           this.axios({
@@ -218,32 +208,45 @@
         this.items=res.data
         })
       },
-
+      handleSelect(key, keyPath) {
+        // console.log(key,keyPath);
+        // if(key==='1')
+        //   this.$router.push({name: 'Home'});
+        if(key==='2')
+          this.$router.push({name:'AddItem'});
+        else if(key==='3')
+          this.$router.push({name:'Message'});
+        else if(key==='4')
+          this.$router.push({name:'Application'});
+        else if(key==='5')
+          this.$router.push({name:'Zone'})
+      },
       transferTime:function(cTime){
-       var jsonDate = new Date(parseInt(cTime));
-       Date.prototype.format = function (format){
-             var  o = {
-                  "y+": this.getFullYear(),
-                  "M+": this.getMonth()+1,
-                  "d+": this.getDate(),
-                  "h+": this.getHours(),
-                  "m+": this.getMinutes(),
-                  "s+": this.getSeconds()
-             };
 
-             if(/(y+)/.test(format)){
-                  format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
-             }
-
-             for(var k in o){
-                  if(new RegExp("("+k+")").test(format)){
-                      format = format.replace(RegExp.$1, RegExp.$1.length == 1?o[k] : ("00" + o[k]).substr("" + o[k].length));
-                  }
-             }
-             return format;
-       };
-       var newDate = jsonDate.format("yyyy-M-d h:m:s");
-       return newDate
+       // var jsonDate = new Date(parseInt(cTime));
+       // Date.prototype.format = function (format){
+       //       var  o = {
+       //            "y+": this.getFullYear(),
+       //            "M+": this.getMonth()+1,
+       //            "d+": this.getDate(),
+       //            "h+": this.getHours(),
+       //            "m+": this.getMinutes(),
+       //            "s+": this.getSeconds()
+       //       };
+       //
+       //       if(/(y+)/.test(format)){
+       //            format = format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+       //       }
+       //
+       //       for(var k in o){
+       //            if(new RegExp("("+k+")").test(format)){
+       //                format = format.replace(RegExp.$1, RegExp.$1.length == 1?o[k] : ("00" + o[k]).substr("" + o[k].length));
+       //            }
+       //       }
+       //       return format;
+       // };
+       // var newDate = jsonDate.format("yyyy-M-d h:m:s");
+       // return newDate
     }
 
     },
@@ -328,6 +331,6 @@ html{
     height: 50px;
     margin: 30px 0;
   }
-  
+
 
 </style>

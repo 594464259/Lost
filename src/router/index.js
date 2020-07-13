@@ -9,6 +9,7 @@ import Application from '@/components/user/Application'
 import Footprint from '@/components/user/Footprint'
 import Message from '@/components/user/Message'
 import my from '@/components/user/my'
+import Zone from '@/components/user/Zone'
 // import Index from '@/components/index'
 
 Vue.use(Router)
@@ -21,6 +22,11 @@ export default new Router({
     //   name: 'HelloWorld',
     //   component: HelloWorld
     // },
+    {
+      path: '/zone',
+      name: 'Zone',
+      component: Zone
+    },
     {
       path: '/login',
       name: 'Login',

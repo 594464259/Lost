@@ -1,33 +1,52 @@
 <template>
   <div class="page">
-    <div class="header">
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-      <ul class="navbar-nav">
-        <li>
-          <a class="navbar-brand" href="#">LANDF</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goHome">首页</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#" >拾遗</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" @click="goMessage">消息</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">积分明细</a>
-        </li>
-      </ul>
-    </nav>
+    <el-header style="padding: 0 0;">
+
+      <!--      <div class="line"></div>-->
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+      >
+        <el-menu-item index="1">首页</el-menu-item>
+        <el-menu-item index="2">拾遗</el-menu-item>
+        <el-menu-item index="3">消息</el-menu-item>
+        <el-menu-item index="4">申请</el-menu-item>
+        <el-menu-item index="5">资料</el-menu-item>
+      </el-menu>
+    </el-header>
+<!--    <div class="header">-->
+<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
+<!--      <ul class="navbar-nav">-->
+<!--        <li>-->
+<!--          <a class="navbar-brand" href="#">LANDF</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goHome">首页</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item active">-->
+<!--          <a class="nav-link" href="#" >拾遗</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
     <div class="container-fluid bg " >
       <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
     </div>
-  </div>
+<!--  </div>-->
     <!-- <div class="top_text">失物招领统计</div>  el-col-24 -->
     <div class="myForm">
     <div>
-      
+
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="物品 类型" prop="type">
           <el-radio-group v-model="ruleForm.type">
@@ -94,7 +113,8 @@
   export default {
     name: 'AddItem',
     data(){
-      return{ 
+      return{
+        activeIndex:'2',
         userId:'',
         ruleForm:{
           userId:'',
@@ -139,7 +159,7 @@
             { required: true, message: '请填写详细描述', trigger: 'blur' }
           ]
         },
-      
+
 
 //
         item:{
@@ -195,7 +215,7 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      },  
+      },
 
       //
       handleRemove(file, fileList) {
@@ -224,7 +244,20 @@
       },
       goMessage(){
         this.$router.push({name: 'Message'})
-      }
+      },
+      handleSelect(key, keyPath) {
+        // console.log(key,keyPath);
+        if(key==='1')
+          this.$router.push({name: 'Home'});
+        // if(key==='2')
+        //   this.$router.push({name:'AddItem'});
+        else if(key==='3')
+          this.$router.push({name:'Message'});
+        else if(key==='4')
+          this.$router.push({name:'Application'});
+        else if(key==='5')
+          this.$router.push({name:'Zone'})
+      },
     }
   }
 </script>
