@@ -32,8 +32,12 @@
       <div class="form sign-up">
         <h2>立即注册</h2>
         <label>
-          <span>用户名</span>
-          <input type="text" v-model="userForm.username"/>
+          <span>真实姓名</span>
+          <input type="text" v-model="userForm.realName"/>
+        </label>
+        <label>
+          <span>联系电话</span>
+          <input type="text" v-model="userForm.phone"/>
         </label>
         <label>
           <span>账号</span>
@@ -44,7 +48,7 @@
           <input type="password" v-model="userForm.password"/>
         </label>
         <button type="button" class="submit" @click="register">注 册</button>
-        <button type="button" class="fb-btn">使用 <span>QQ</span> 帐号注册</button>
+<!--        <button type="button" class="fb-btn">使用 <span>QQ</span> 帐号注册</button>-->
       </div>
     </div>
   </div>
@@ -59,17 +63,18 @@
         showErr:false,
         showSuc:false,
         userForm:{
-          username:'',
+          realName:'',
           // e-mail:'',
           account: '',
           password:'',
+          phone:'',
         },
         // token:'',
       }
     },
     methods:{
       register:function(){
-        if (this.userForm.username===''){
+        if (this.userForm.realName===''){
           this.$message.warning("请输入用户名")
         }
         else if (this.userForm.account===''){
@@ -78,7 +83,7 @@
         else if (this.userForm.password === '') {
           // alert('输入密码!');
           this.$message.warning("请输入密码");
-        } else if(this.userForm.username!=''&& this.userForm.account!=''&&this.userForm.password!== ''){
+        } else if(this.userForm.realName!=''&& this.userForm.account!=''&&this.userForm.password!== ''){
         this.axios({
             headers:{
               "Access-Control-Allow-Origin": "*",
@@ -138,7 +143,7 @@
           account: _this.userForm.account,
           password: _this.userForm.password,
         }
-        
+
         if (this.userForm.account===''){
           this.$message.warning("请输入账号")
         }
@@ -171,7 +176,7 @@
               // _this.$store.dispatch('getUser',id)
               _this.$router.push({name: 'Home'})
             }
-            
+
             else if(res.data===-1){
               this.$message.warning("账号密码错误，请检查后重新输入");
               // _this.showErr = true;
