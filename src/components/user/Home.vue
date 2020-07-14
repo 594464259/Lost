@@ -21,7 +21,7 @@
         <el-dropdown @command="handleCommand" style="float: right">
           <el-button type="text" style="padding: 0px 5px 0 0;">
 <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
+            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>
           </el-button>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="1">编辑资料</el-dropdown-item>
@@ -181,6 +181,9 @@
         :total="100" style="height: 100%;">
       </el-pagination>
     </div>
+
+<!--    回到顶部-->
+<!--    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
   </div>
 
 </template>
@@ -199,7 +202,7 @@
         // credit:0,
         items:[],
         page: 1,
-        limit: 10,
+        limit: 5,
 
         currentPage:1,
       }
@@ -300,7 +303,7 @@
         if(key==='2')
           this.$router.push({name:'AddItem'});
         else if(key==='3')
-          this.$router.push({name:'Message'});
+          this.$router.push({name:'Message',params:{itemId:''}});
         else if(key==='4')
           this.$router.push({name:'Application'});
         else if(key==='5')

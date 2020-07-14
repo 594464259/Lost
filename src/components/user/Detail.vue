@@ -40,8 +40,8 @@
       <div class="infoCard">
         <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">
         <ul id="info">
-          <p>姓名：{{username}}</p>
-          <p>积分：{{credit}}</p>
+          <p>账号：{{username}}</p>
+          <p>姓名：{{credit}}</p>
         </ul>
       </div>
     </div>
@@ -100,14 +100,20 @@
         <br>
         <a href="#" class="card-link">{{item.time}}</a>
         <br>
-        <a href="#" class="card-link">{{item.picture}}</a>
+        <el-image style="width: 100%" :src=item.picture >  </el-image>
         <br>
         <a href="#" class="card-link">发布者{{item.publisherName}}</a>
-        <el-button type="primary" href="javascript:void(0)"  @click="goMessage(item.publisherId,item.id)" style="color:black;" round>联系他</el-button>
+        <div class="category">
+          <span v-if="item.publisherId===this.userId"><el-button type="primary" style="color:black;" disabled>无法联系你自己</el-button></span>
+          <span v-if="item.publisherId!=this.userId"><el-button type="primary" href="javascript:void(0)"  @click="goMessage(item.publisherId,item.id)" style="color:black;" round>联系他</el-button></span>
+        </div>
+
+        <!--<el-button type="primary" href="javascript:void(0)"  @click="goMessage(item.publisherId,item.id)" style="color:black;" round>联系他</el-button>-->
         <!--        <p>{{item.time}}</p>-->
         <!--        <p>{{item.id}}</p>-->
       </div>
     </div>
+    <el-footer id="white"></el-footer>
   </div>
 </template>
 
@@ -117,7 +123,9 @@ import {mapState} from 'vuex'
     name: 'Detail',
     data:function () {
       return{
+        fit:'cover',
         activeIndex: '0',
+        userId:'',
         username:'',
         credit:'',
         itemId:'',
@@ -158,8 +166,9 @@ import {mapState} from 'vuex'
            method:'GET',
            url:'/api/user/'+this.id,
          }).then(res=>{
-           this.username=res.data.realname
-           this.credit=res.data.rewards
+           this.username=res.data.account
+           this.credit=res.data.realname
+           this.userId=res.data.id
          })
         this.axios({
           method:'GET',
@@ -218,10 +227,12 @@ import {mapState} from 'vuex'
       },
     },
 
+    mounted(){
+      this.myInit()
+    },
     created () {
       // console.log(this.$route.query.itemId)
-      this.itemId=this.$route.params.itemId;
-      this.myInit()
+
       // window.document.body.style.backgroundColor = 'rgba(254, 237, 186, 0.64)'
     },
     computed:mapState({
@@ -257,7 +268,7 @@ import {mapState} from 'vuex'
     position: relative;
     padding: 30px;
     width: 20%;
-    margin-bottom: 100%;
+    /*margin-bottom: 100%;*/
   }
   .carousel-control-prev{
     left: 32px;
@@ -273,7 +284,7 @@ import {mapState} from 'vuex'
     padding: 30px;
     width: 20%;
     height: 400px;
-    margin-bottom: 100%;
+    /*margin-bottom: 100%;*/
   }
   .infoCard{
     padding: 25% 12%;
@@ -289,5 +300,9 @@ import {mapState} from 'vuex'
   }
   .el-header{
     line-height: 0px;
+  }
+
+  #white{
+    background-color: #fef3d2;
   }
 </style>

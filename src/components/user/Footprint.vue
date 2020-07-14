@@ -153,7 +153,7 @@
         else if(key==='2')
           this.$router.push({name:'AddItem'});
         else if(key==='3')
-          this.$router.push({name:'Message'});
+          this.$router.push({name:'Message',params:{itemId:''}});
         else if(key==='4')
           this.$router.push({name:'Application'});
         else if(key==='5')
