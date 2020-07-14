@@ -177,7 +177,7 @@
         this.$router.push({name:'Zone'})
       },
       goLogin(){
-        this.router.push({name:'Login'})
+        this.$router.push({name:'Login'})
       },
       closeDialog(){
         this.$refs.form.resetFields()

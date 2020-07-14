@@ -18,27 +18,21 @@
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
         <el-menu-item index="6">足迹</el-menu-item>
+        <el-dropdown @command="handleCommand" style="float: right">
+          <el-button type="text" style="padding: 0px 5px 0 0;">
+            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
+            <el-dropdown-item command="0">退出登录</el-dropdown-item>
+            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
       </el-menu>
     </el-header>
-<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
-<!--      <ul class="navbar-nav">-->
-<!--        <li>-->
-<!--          <a class="navbar-brand" href="#">LANDF</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goHome">首页</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </nav>-->
+
     <div class="container-fluid bg " >
       <h1 style="padding-top: 50px; color: #007bff;">LANDF</h1>
     </div>
@@ -47,7 +41,6 @@
         <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">
         <ul id="info">
           <p>姓名：{{username}}</p>
-          <!-- <p>归还：{{times}}</p> -->
           <p>积分：{{credit}}</p>
         </ul>
       </div>
@@ -103,8 +96,14 @@
         <!--        <a href="" class="card-title card-link" style="font-size: large">{{item.name}}</a>-->
         <p class="card-text">{{item.details}}</p>
         <!--        <p v-html="item.details"></p>-->
+        <a href="#" class="card-link">{{item.address}}</a>
+        <br>
         <a href="#" class="card-link">{{item.time}}</a>
-        <a href="#" class="card-link">{{item.id}}</a>
+        <br>
+        <a href="#" class="card-link">{{item.picture}}</a>
+        <br>
+        <a href="#" class="card-link">发布者{{item.publisherName}}</a>
+        <el-button type="primary" href="javascript:void(0)"  @click="goMessage(item.publisherId,item.id)" style="color:black;" round>联系他</el-button>
         <!--        <p>{{item.time}}</p>-->
         <!--        <p>{{item.id}}</p>-->
       </div>
@@ -130,31 +129,74 @@ import {mapState} from 'vuex'
           id:'',
           name:'',
           address:'',
-          reward:'',
           time:'',
           details:'',
           picture:'',
-          userId:'',
+          status:'',
+          publisherId:'',
           type:'',
+          publisherName:'',
         }
       }
     },
     methods:{
-      myInit(){
-        // this.axios({
-        //   method:'GET',
-        //   url:'/api/user/'+this.$store.state.id,
-        // }).then(res=>{
-        //   // console.log(res.data)
-        //   this.username=res.data.username
-        //   this.credit=res.data.rewards
-        // })
+      handleCommand(command){
+        if(command==="1")
+          this.goZone()
+        else
+          this.goLogin()
       },
+      goZone(){
+        this.$router.push({name:'Zone'})
+      },
+      goLogin(){
+        this.$router.push({name:'Login'})
+      },
+      myInit(){
+        this.id=localStorage.getItem('id')
+        this.axios({
+           method:'GET',
+           url:'/api/user/'+this.id,
+         }).then(res=>{
+           this.username=res.data.realname
+           this.credit=res.data.rewards
+         })
+        this.axios({
+          method:'GET',
+          url:'api/items/id',
+          params:{
+            id: this.$route.params.itemId,
+            userid: this.id
+          }
+        }).then(res=>{
+          console.log(res)
+          this.item.id=res.data.id;
+          this.item.name=res.data.name;
+          this.item.address=res.data.address;
+          this.item.time=res.data.time;
+          this.item.details=res.data.details;
+          this.item.picture=res.data.picture;
+          this.item.status=res.data.status;
+          this.item.publisherId=res.data.publisherid;
+          this.item.type=res.data.type;
+          // console.log(res.data.publisherid)
+          this.axios({
+            method:'GET',
+            url:'/api/user/'+res.data.publisherid,
+          }).then(res=>{
+            this.item.publisherName=res.data.realname
+          })
+        })
+
+
+      },
+
       goHome(){
         this.$router.push({name:'Home'})
       },
-      goMessage(){
-        this.$router.push({name: 'Message'})
+      goMessage(userId,itemId){
+        // this.$router.push({name: 'Message',params:{friendId:this.item.publisherId,itemId:this.item.id}})
+        this.$router.push({name: 'Message',params:{friendId:userId,itemId:itemId}})
       },
       goAddItem(){
         this.$router.push({name:'AddItem'})
@@ -244,5 +286,8 @@ import {mapState} from 'vuex'
   ul[id='info']{
     padding-top: 18%;
     font-size: 15px;
+  }
+  .el-header{
+    line-height: 0px;
   }
 </style>

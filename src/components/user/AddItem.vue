@@ -18,28 +18,21 @@
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
         <el-menu-item index="6">足迹</el-menu-item>
+        <el-dropdown @command="handleCommand" style="float: right">
+          <el-button type="text" style="padding: 0px 5px 0 0;">
+            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
+            <el-dropdown-item command="0">退出登录</el-dropdown-item>
+            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
       </el-menu>
     </el-header>
-<!--    <div class="header">-->
-<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
-<!--      <ul class="navbar-nav">-->
-<!--        <li>-->
-<!--          <a class="navbar-brand" href="#">LANDF</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goHome">首页</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="#" >拾遗</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </nav>-->
+
     <div class="container-fluid bg " >
       <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
     </div>
@@ -56,11 +49,21 @@
 <!--            <el-radio label="1">遗失</el-radio>-->
 <!--          </el-radio-group>-->
 <!--        </el-form-item>-->
-        <el-form-item label="物品 名称" prop="name">
+        <el-form-item label="物品名称" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="拾/遗区域" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择拾取/丢失区域">
+        <el-form-item label="物品类别" prop="type">
+          <el-select v-model="ruleForm.type" placeholder="请选择类别">
+            <el-option label="现金" value="1"></el-option>
+            <el-option label="电子产品" value="2"></el-option>
+            <el-option label="证件" value="3"></el-option>
+            <el-option label="衣服" value="4"></el-option>
+            <el-option label="文具" value="5"></el-option>
+            <el-option label="其他" value="6"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="拾遗区域" prop="region">
+          <el-select v-model="ruleForm.region" placeholder="请选择拾取区域">
             <el-option label="学生公寓" value="学生公寓"></el-option>
             <el-option label="海韵教学楼" value="海韵教学楼"></el-option>
             <el-option label="图书馆" value="图书馆"></el-option>
@@ -68,7 +71,7 @@
             <el-option label="其他" value="其他"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="拾/遗时间" required>
+        <el-form-item label="拾遗时间" required>
           <el-col :span="11">
             <el-form-item prop="date1">
               <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
@@ -81,19 +84,8 @@
             </el-form-item>
           </el-col>
         </el-form-item>
-        <!-- <el-form-item label="即时配送" prop="delivery">
-          <el-switch v-model="ruleForm.delivery"></el-switch>
-        </el-form-item>
-        <el-form-item label="活动性质" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-            <el-checkbox label="地推活动" name="type"></el-checkbox>
-            <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-            <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-          </el-checkbox-group>
-        </el-form-item> -->
 
-        <el-form-item label="详细 描述" prop="desc">
+        <el-form-item label="详细描述" prop="desc">
           <el-input type="textarea" v-model="ruleForm.desc"></el-input>
         </el-form-item>
         <el-form-item>
@@ -132,9 +124,10 @@
         //   key:1,
         //   value:'丢失'
         // }],
-        type: '0',
+          type: '',
+          status: '0',
         // resource: '',
-        desc: '',
+          desc: '',
         },
          rules: {
           name: [
@@ -142,7 +135,7 @@
             { min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
           ],
           region: [
-            { required: true, message: '请选择丢失/拾取区域', trigger: 'change' }
+            { required: true, message: '请选择拾取区域', trigger: 'change' }
           ],
           date1: [
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
@@ -150,9 +143,9 @@
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
           ],
-          // type: [
-          //   { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-          // ],
+          type: [
+            {required: true, message: '请至少选择一种类型', trigger: 'change' }
+          ],
           // resource: [
           //   { required: true, message: '请选择活动资源', trigger: 'change' }
           // ],
@@ -175,24 +168,37 @@
       }
     },
     created(){
-      console.log(localStorage.getItem("id"))
+      // console.log(localStorage.getItem("id"))
       this.userId=localStorage.getItem("id")
       // console.log(this.$store.state.id)
       // console.log(this.ruleForm.type)
     },
     methods:{
+      handleCommand(command){
+        if(command==="1")
+          this.goZone()
+        else
+          this.goLogin()
+      },
+      goZone(){
+        this.$router.push({name:'Zone'})
+      },
+      goLogin(){
+        this.$router.push({name:'Login'})
+      },
     submitForm(formName) {
       let myForm={
                 //后端问题，没有将userId插入
                 name:this.ruleForm.name,
                 address:this.ruleForm.region,
-                reward: 10,
+                // reward: 10,
                 time:this.ruleForm.date1,
                 details:this.ruleForm.desc,
-                userId:this.userId,
+                publisherid:this.userId,
+                // status: this.ruleForm.status,
                 type:this.ruleForm.type
               };
-        console.log(myForm)
+        // console.log(myForm)
         this.$refs[formName].validate((valid) => {
           if (valid) {
             // alert('submit!');
@@ -203,7 +209,7 @@
             }).then(res=>{
               console.log(res);
               if(res.data===1){
-                this.message.success("上传成功")
+                this.$message.success("上传成功")
                 this.$router.push({name:'Home'})
               }
             })
@@ -295,5 +301,7 @@
     width: 30%;
     text-align: start;
   }
-
+  .el-header{
+    line-height: 0px;
+  }
 </style>

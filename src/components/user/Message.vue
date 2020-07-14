@@ -18,6 +18,18 @@
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
         <el-menu-item index="6">足迹</el-menu-item>
+        <el-dropdown @command="handleCommand" style="float: right">
+          <el-button type="text" style="padding: 0px 5px 0 0;">
+            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
+            <el-dropdown-item command="0">退出登录</el-dropdown-item>
+            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
       </el-menu>
     </el-header>
     <el-container style="margin: 5% 8%">
@@ -26,7 +38,7 @@
         aside
       </el-aside>
       <el-container>
-        <el-header>
+        <el-header  style="line-height: 60px">
           header
         </el-header>
         <el-main>
@@ -34,6 +46,7 @@
         </el-main>
         <el-footer>
           footer
+<!--          <small> <i class="el-icon-message"></i> 反馈：123456@163.com</small>-->
         </el-footer>
       </el-container>
     </el-container>
@@ -47,28 +60,30 @@ export default {
     data(){
         return{
           activeIndex: '3',
-          friends:[
-            {
-              name: "ming",
-              message:[
-                "123",
-                "456",
-                "789"
-              ]
-            },
-            {
-              name: "Hong",
-              message:[
-                "one",
-                "two",
-                "three"
-              ]
-            }
 
-          ]
+
+          sourceItem:'',
+          itemFinder:''
         }
     },
     methods:{
+      myInit(){
+        this.sourceItem=this.$route.params.itemId;
+        this.itemFinder=this.$route.params.friendId;
+        // console.log(this.sourceItem,this.itemFinder)
+      },
+      handleCommand(command){
+        if(command==="1")
+          this.goZone()
+        else
+          this.goLogin()
+      },
+      goZone(){
+        this.$router.push({name:'Zone'})
+      },
+      goLogin(){
+        this.$router.push({name:'Login'})
+      },
         // goHome(){
         //     this.$router.push({name:'Home'})
         // },
@@ -89,7 +104,10 @@ export default {
         else if(key==='6')
           this.$router.push({name:'Footprint'});
       }
-    }
+    },
+  mounted () {
+      this.myInit();
+  }
 
 }
 </script>
@@ -147,5 +165,8 @@ export default {
 
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
+  }
+  .el-header{
+    line-height: 0px;
   }
 </style>

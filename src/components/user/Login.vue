@@ -84,6 +84,12 @@
           // alert('输入密码!');
           this.$message.warning("请输入密码");
         } else if(this.userForm.realName!=''&& this.userForm.account!=''&&this.userForm.password!== ''){
+          let form={
+            realname:this.userForm.realName,
+            account: this.userForm.account,
+            password:this.userForm.password,
+            phone:this.userForm.phone,
+          }
         this.axios({
             headers:{
               "Access-Control-Allow-Origin": "*",
@@ -92,7 +98,8 @@
             url:'/api/register',
             crossDomain:true,
             method:'post',
-            data: this.userForm,
+            // data: this.userForm,
+            data: form,
             withCredentials : true
           }).then(res=>{
             console.log(res)

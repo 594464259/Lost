@@ -1,6 +1,6 @@
 <template>
   <div class="page" >
-    <el-header style="padding: 0 0;">
+    <el-header id="nav" style="padding: 0 0;">
 
       <!--      <div class="line"></div>-->
       <el-menu
@@ -18,28 +18,22 @@
         <el-menu-item index="4">申请</el-menu-item>
         <el-menu-item index="5">资料</el-menu-item>
         <el-menu-item index="6">足迹</el-menu-item>
+        <el-dropdown @command="handleCommand" style="float: right">
+          <el-button type="text" style="padding: 0px 5px 0 0;">
+<!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
+          </el-button>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
+            <el-dropdown-item command="0">退出登录</el-dropdown-item>
+            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>
       </el-menu>
+
     </el-header>
-<!--    <div class="header">-->
-<!--    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">-->
-<!--      <ul class="navbar-nav">-->
-<!--        <li>-->
-<!--          <a class="navbar-brand" href="#">LANDF</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="#">首页</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goAddItem">拾遗</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" href="#" @click="goMessage">消息</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link disabled" href="#">积分明细</a>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </nav>-->
+
     <div class="container-fluid bg " >
       <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
     </div>
@@ -47,25 +41,75 @@
   <el-row :gutter="0">
     <div class="myContainer">
     <el-col :span="5" style="height: 100%;">
-    <div class="myCard" style=" height: 100%;">
-      <div class="infoCard">
-        <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">
-        <ul id="info">
-            <!-- <p>ID:{{this.$store.state.id}}</p> -->
-            <!-- <p>ID: {{id}}</p> -->
-            <p>姓名：{{username}}</p>
-            <!-- <p>归还：{{times}}</p> -->
-            <p>积分：{{credit}}</p>
-        </ul>
-      </div>
-    </div>
+      <el-col :span=18 style="margin: 10% 8%;">
+        <el-menu
+          default-active="1"
+          class="el-menu-vertical-demo"
+          @open="handleOpen"
+          @close="handleClose"
+          @select="handleMenu"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b">
+
+          <el-menu-item index="1">
+            <i class="el-icon-menu"></i>
+            <span slot="title">全部</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-money"></i>
+            <span slot="title">现金</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <i class="el-icon-headset"></i>
+            <span slot="title">电子</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-bank-card"></i>
+            <span slot="title">证件</span>
+          </el-menu-item>
+          <el-menu-item index="5">
+            <i class="el-icon-shopping-bag-1"></i>
+            <span slot="title">衣服</span>
+          </el-menu-item>
+          <el-menu-item index="6">
+            <i class="el-icon-notebook-1"></i>
+            <span slot="title">文具</span>
+          </el-menu-item>
+          <el-menu-item index="7">
+            <i class="el-icon-loading"></i>
+            <span slot="title">其他</span>
+          </el-menu-item>
+        </el-menu>
+      </el-col>
+<!--    <div class="myCard" style=" height: 100%;">-->
+<!--      <div class="infoCard">-->
+<!--        <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">-->
+<!--        <ul id="info">-->
+<!--            &lt;!&ndash; <p>ID:{{this.$store.state.id}}</p> &ndash;&gt;-->
+<!--            &lt;!&ndash; <p>ID: {{id}}</p> &ndash;&gt;-->
+<!--            <p>姓名：{{username}}</p>-->
+<!--            &lt;!&ndash; <p>归还：{{times}}</p> &ndash;&gt;-->
+<!--            <p>电话：{{phone}}</p>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--    </div>-->
     </el-col>
     <el-col :span="14">
-    <div class="things" style="position: relative;">
+    <div class="things" style="position: relative;width: 100%">
       <div class="card" v-for="item in items" :key="item.Id" style="margin-top: 30px;">
         <div class="card-body" style="text-align: start">
+          <div class="category" style="float: right">类别:
+            <span v-if="item.type===1"><i class="el-icon-money"></i>现金</span>
+            <span v-if="item.type===2"><i class="el-icon-headset"></i>电子</span>
+            <span v-if="item.type===3"><i class="el-icon-bank-card"></i>证件</span>
+            <span v-if="item.type===4"><i class="el-icon-shopping-bag-1"></i>衣服</span>
+            <span v-if="item.type===5"><i class="el-icon-notebook-1"></i>文具</span>
+            <span v-if="item.type===6"><i class="el-icon-loading"></i>其他</span>
+          </div>
           <!-- <h4 class="card-title"><a href="javascript:void(0)">{{item.name}}</a></h4> -->
           <h3 class="card-titile"><a class="card-link" href="javascript:void(0)"  @click="goDetail(item.id)" style="color:black;">{{item.name}}</a></h3>
+
           <br>
           <p><a v-html="item.details"></a></p>
           <small>{{item.time}}</small>
@@ -134,6 +178,7 @@
       </el-pagination>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -145,7 +190,8 @@
         activeIndex: '1',
         id:'',
         username:'请登录',
-        credit:0,
+        phone:'',
+        // credit:0,
         items:[],
         page: 1,
         limit: 10,
@@ -154,8 +200,45 @@
       }
     },
     methods:{
+      handleCommand(command){
+        if(command==="1")
+          this.goZone()
+        else
+          this.goLogin()
+      },
+      handleMenu(key,keyPath){
+        if(key==='1'){
+          this.axios({
+            method:'GET',
+            url: '/api/items',
+            // params:{
+            //   page: 1,
+            //   limit: 5
+            // }
+          }).then(res=>{
+            // console.log("begin")
+            // console.log(res.data)
+            this.items=res.data
+          })
+        }
+        else{
+          this.axios({
+            method:'get',
+            url:'api/items/category/'+ (key-1)
+            }
+          ).then(res=>{
+            this.items=res.data
+          })
+        }
+      },
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      },
       myInit:function(){
-        console.log("初始化")
+        // console.log("初始化")
 
         // console.log(document.cookie)
         // console.log(localStorage.getItem('id'))
@@ -169,7 +252,7 @@
           // }
         }).then(res=>{
           // console.log("begin")
-          console.log(res.data)
+          // console.log(res.data)
         this.items=res.data
         })
 
@@ -178,19 +261,14 @@
           url:'/api/user/'+this.id,
         }).then(res=>{
           // console.log(res.data)
-          this.username=res.data.username
-          this.credit=res.data.rewards
+          this.username=res.data.realname
+          this.phone=res.data.phone
+          // this.credit=res.data.rewards
         })
       },
-      //
-      // goAddItem:function() {
-      //   // this.$store.dispatch('getUser',this.$store.state.id)
-      //   this.$router.push({name:'AddItem'})
-      // },
-      // goMessage:function() {
-      //   // this.$store.dispatch('getUser',this.$store.state.id)
-      //   this.$router.push({name:'Message'})
-      // },
+      goLogin(){
+        this.$router.push({name:'Login'})
+      },
       goDetail(itemId){
         // this.$store.dispatch('getUser',this.$store.state.id)
         this.$router.push({name:'Detail',params:{itemId:itemId}})
@@ -204,8 +282,7 @@
             limit: 5
           }
         }).then(res=>{
-          // console.log("begin")
-          // console.log(res.data)
+
         this.items=res.data
         })
       },
@@ -223,6 +300,9 @@
           this.$router.push({name:'Zone'});
         else if(key==='6')
           this.$router.push({name:'Footprint'});
+      },
+      goZone(){
+        this.$router.push({name:'Zone'})
       },
       transferTime:function(cTime){
 
@@ -334,6 +414,8 @@ html{
     height: 50px;
     margin: 30px 0;
   }
-
+  #nav{
+    line-height: 0px;
+  }
 
 </style>

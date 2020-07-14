@@ -1,155 +1,94 @@
 <template>
-  <div>
-    <!-- 123456 -->
-    <el-upload
-     action="api/upload"
-     :on-preview="handlePreview"
-     :auto-upload="false"
-     :multiple="false"
-     accept=".jpg, .png"
-     :on-change="ImgReq"
-     >
-     <el-button size="small" type="primary">上传对比表</el-button>
-     <div slot="tip">按模板上传对比表</div>
-   </el-upload>
-    <a href="javascript:void(0)" @click="getItem">123</a>
-</div>
+<!--  <div>-->
+<!--    &lt;!&ndash; 123456 &ndash;&gt;-->
+<!--    <el-upload-->
+<!--     action="api/upload"-->
+<!--     :on-preview="handlePreview"-->
+<!--     :auto-upload="false"-->
+<!--     :multiple="false"-->
+<!--     accept=".jpg, .png"-->
+<!--     :on-change="ImgReq"-->
+<!--     >-->
+<!--     <el-button size="small" type="primary">上传对比表</el-button>-->
+<!--     <div slot="tip">按模板上传对比表</div>-->
+<!--   </el-upload>-->
+<!--    <a href="javascript:void(0)" @click="getItem">123</a>-->
+<!--</div>-->
+<el-container>
+  <el-upload
+    ref="upload"
+    action="https://jsonplaceholder.typicode.com/posts/"
+    :headers="myHeaders"
+    list-type="picture-card"
+    :on-preview="handlePictureCardPreview"
+
+    :auto-upload="autoUpload" >
+    <i class="el-icon-plus"></i>
+<!--    <el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
+    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+  </el-upload>
+  <el-dialog :visible.sync="dialogVisible">
+    <img width="100%" :src="dialogImageUrl" alt="">
+  </el-dialog>
+
+
+<!--  <el-upload-->
+<!--    class="upload-demo"-->
+<!--    ref="upload"-->
+<!--    action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--    :on-preview="handlePreview"-->
+<!--    :on-remove="handleRemove"-->
+<!--    :file-list="fileList"-->
+<!--    :auto-upload="false">-->
+<!--    <el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
+<!--    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>-->
+<!--    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+<!--  </el-upload>-->
+
+</el-container>
 </template>
 
 <script>
 export default {
-  
+
     name:'test',
     data(){
         return{
+          dialogImageUrl: '',
+          dialogVisible: false,
+          disabled: false,
+          autoUpload: false,
+
+          myHeaders:{'Access-Control-Allow-Origin':'*'},
+
+          fileList: [
+            // {
+            //   name: 'food.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // }, {
+            //   name: 'food2.jpeg',
+            //   url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+            // }
+          ]
 
         }
     },
-    methods:{
-      getItem(){
-        // console.log("起飞")
-        // this.$jsonp('http://localhost:8888/hello',{
-        //   callbackQuery: "callbackParam",
-        //   callbackName: "jsonpCallback"
-        // }).then((json)=>{
-        //   console.log(json)
-        // })
-        console.log("梅开二度")
-        this.axios({
-          url:'api/items',
-          method:'get',
-          // url:'/api/login',
-          // headers:{
-          //   "Access-Control-Allow-Origin":'*'
-          // },
-          // dataType: 'jsonp',
-          // method:'post',
-          // data:{
-          //   account: '1234',
-          //   password: '1234'
-          // }
-        }).then(res=>{
-          console.log(res.data);
-        })
+    methods: {
+      submitUpload() {
+        this.$refs.upload.submit();
       },
-      login(){
-        this.axios({
-          method:'post',
-          url:'/api/login',
-          data:{
-            account:'liming',
-            password:'liming'
-          }
-        }).then(res=>{
-          console.log(res.data)
-        })
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
       },
-      
+      handlePictureCardPreview(file) {
+        // console.log(file.url)
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
       handlePreview(file) {
         console.log(file);
-      },
-      ImgReq(req){
-        // uid 作为唯一标识，方便上传完成后精准地替换图片 url
-        const uid = req.file.uid 
-        // 获取文件后缀名的函数
-        const ext = getFileExt(req.file.name) 
-        // 自定义 key ，上传时对图片的重命名会用到
-        let keyname = this.$formatDate(new Date(), 'yyyyMMddhhmmss') + Math.floor(Math.random() * 1000) + '.' + ext
-        // 压缩图片
-        let newFile = null
-        lrz(req.file, {
-          quality: 0.7
-        }).then(rst => {
-          // 压缩完成
-          newFile = rst.file
-          // 创建form对象，上传七牛云所需要的参数
-          const fileData = new FormData() 
-          fileData.append('file', newFile)
-          fileData.append('token', this.token)
-          fileData.append('key', keyname)
-          const config = {
-            headers: { 'Content-Type': 'multipart/form-data' },
-            // 这一段代码解决进度条不显示的问题，属于 axios 的使用知识。具体可以看文末的参考链接。
-            onUploadProgress: progressEvent => {
-            const percentCompleted = Math.floor((progressEvent.loaded * 100) / progressEvent.total)
-            req.onProgress({ percent: percentCompleted })
-          }
-          }
-          // 请求七牛云的接口，具体看自己怎么配置
-          // 这里的 action 是请求地址，fileData 是请求发送的内容，config 是 http 的相关配置
-          // 官方的请求地址可以查看这个链接：https://developer.qiniu.com/kodo/manual/1671/region-endpoint
-          axios.post($config[this.bucket].action, fileData, config).then(res => {
-            const url = 'http://8.129.163.25:8888/api/upload'
-            // 修改 url
-            this.fileList.forEach((item) => {
-              if (item.uid === uid) {
-                item.url = url
-              }
-            })
-            req.onSuccess(res)
-          }).catch(err => {
-            req.onError(err)
-          })
-        }).catch(err => {
-          console.log(err)
-        })
-      },
-
-
-
-      changeFile (file) {
-      let fd = new FormData()
-      fd.append('file', file)
-      fd.append('aid', this.selecta)
-      fd.append('bid', this.selectb)
-      fd.append('fileName', file.name)
-      let config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        //   'enctype':"multipart/form-data"
-        }
       }
-    //   this.axios.post('localhost:8999/upload2', fd, config).then(data => {
-    //     if (data.code === 200) {
-    //       this.$message.info('成功上传')
-    //     }
-    //     // this.axios.post('http://8.129.163.25:8999/upload2', file, config).then(data => {
-    //     // if (data.code === 200) {
-    //     //   this.$message.info('成功上传')
-    //     // }
-    //   })
-    this.axios({
-        headers: {
-        // 'Content-Type': 'multipart/form-data'
-        },
-        // url: 'localhost:8999/upload2',
-        url: 'http://8.129.163.25:8888/api/upload',
-        // dataType: 'jsonp',
-        crossDomain:true,
-        method:'post',
-        data: file,
-    })
-    }
     }
 }
 </script>
