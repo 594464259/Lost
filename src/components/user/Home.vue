@@ -111,7 +111,11 @@
           <h3 class="card-titile"><a class="card-link" href="javascript:void(0)"  @click="goDetail(item.id)" style="color:black;">{{item.name}}</a></h3>
 
           <br>
+          <el-image style="float: left;margin-right:10px;width: 100px; height: 100px" :src=item.picture :fit="fit" lazy>  </el-image>
           <p><a v-html="item.details"></a></p>
+          <br>
+          <br>
+          <br>
           <small>{{item.time}}</small>
 <!--          <small>{{transferTime(item.time)}}</small>-->
           <!-- <a href="javascript:void(0)" class="card-link">{{transferTime(item.time)}}</a>  -->
@@ -187,6 +191,7 @@
     name: 'Home',
     data:function () {
       return{
+        fit:'cover',
         activeIndex: '1',
         id:'',
         username:'请登录',
@@ -252,7 +257,7 @@
           // }
         }).then(res=>{
           // console.log("begin")
-          // console.log(res.data)
+          console.log(res.data)
         this.items=res.data
         })
 
@@ -265,6 +270,8 @@
           this.phone=res.data.phone
           // this.credit=res.data.rewards
         })
+
+
       },
       goLogin(){
         this.$router.push({name:'Login'})
