@@ -10,6 +10,7 @@ import Footprint from '@/components/user/Footprint'
 import Message from '@/components/user/Message'
 import my from '@/components/user/my'
 import Zone from '@/components/user/Zone'
+import Upload from '@/components/user/Upload'
 // import Index from '@/components/index'
 
 Vue.use(Router)
@@ -86,6 +87,11 @@ export default new Router({
       name: 'test',
       component: my,
     },
+    {
+      path:'/up',
+      name:'up',
+      component: Upload
+    }
 
   ]
 })

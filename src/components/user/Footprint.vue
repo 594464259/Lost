@@ -152,6 +152,8 @@
           this.$router.push({name: 'Home'});
         else if(key==='2')
           this.$router.push({name:'AddItem'});
+        else if(key==='3')
+          this.$router.push({name:'Message'});
         else if(key==='4')
           this.$router.push({name:'Application'});
         else if(key==='5')
