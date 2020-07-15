@@ -118,7 +118,7 @@
             </el-col>
           </el-form>
 
-          <el-dialog title="修改密码" :visible.sync="dialogFormVisible" width="40%"  @close="closeDialog">
+          <el-dialog title="提交申请" :visible.sync="dialogFormVisible" width="40%"  @close="closeDialog">
 <!--            <el-form :model="applicationForm" status-icon ref="form" label-width="100px" class="demo-form">-->
 <!--              <el-form-item label="原密码" prop="password">-->
 <!--                <el-input type="password" v-model="form.password" autocomplete="off"></el-input>-->
@@ -146,8 +146,8 @@
               :file-list="fileList"
               :auto-upload="false">
               <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
-              <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-              <div slot="tip" class="el-upload__tip">服务器容量有限，尽量不要上传大文件！</div>
+              <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">点击提交</el-button>
+              <div slot="tip" class="el-upload__tip"> 请上传与物品发布者的聊天截图记录作为证据 </div>
             </el-upload>
           </el-dialog>
         </el-footer>
@@ -229,7 +229,7 @@ export default {
             data:this.applicationForm
           }).then(res=>{
             if((res.data+'')==='1')
-              this.$message.success("申请提交成功")
+              this.$message.success("申请提交成功，请等待管理员审核")
             else
               this.$message.error("申请提交失败")
           }).catch(err=>{
@@ -280,9 +280,10 @@ export default {
           if((res.data+'')==='1'){
             this.$notify({
               title: '成功',
-              message: '消息发送成功',
+              message: '消息发送成功，刷新页面以接收消息',
               type: 'success'
             });
+
 
             this.messageRecord=this.messageRecord.concat([temp])
 
@@ -375,6 +376,15 @@ export default {
               this.itemFinder = res.data;
               this.activeFriend=this.itemFinder.id
               console.log(this.itemFinder)
+
+              // 若之前有交流先删除原交流
+              for(let i=0;i<this.recentFriends.length;i++){
+                if(this.recentFriends[i].id===this.itemFinder.id){
+                  this.recentFriends.splice(i, 1);
+                  break;
+                }
+              }
+
               this.recentFriends=[this.itemFinder].concat(this.recentFriends)
 
               this.axios({
