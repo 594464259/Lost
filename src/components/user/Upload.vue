@@ -14,10 +14,15 @@
     <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
     <div slot="tip" class="el-upload__tip">服务器容量有限，尽量不要上传大文件！</div>
   </el-upload>
+
+
+    <el-button @click="RSA">RSA</el-button>
   </el-container>
 </template>
 
 <script>
+  // import {JSEncrypt} from '"https://cdn.bootcss.com/jsencrypt/3.0.0-beta.1/jsencrypt.js"'
+
   export default {
     name: 'Upload',
     data(){
@@ -27,6 +32,18 @@
       }
     },
     methods: {
+      RSA(){
+        let PUBLIC_KEY = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8HMr2CBpoZPm3t9tCVlrKtTmI4jNJc7/HhxjIEiDjC8czP4PV+44LjXvLYcSV0fwi6nE4LH2c5PBPEnPfqp0g8TZeX+bYGvd70cXee9d8wHgBqi4k0J0X33c0ZnW7JruftPyvJo9OelYSofBXQTcwI+3uIl/YvrgQRv6A5mW01QIDAQAB';
+        let encrypt = new JSEncrypt();
+        encrypt.setPublicKey('-----BEGIN PUBLIC KEY-----' + PUBLIC_KEY + '-----END PUBLIC KEY-----');
+        let str = {
+          "uid":"1223334",
+          "pwd":"asd"
+        }
+        let encrypted = encrypt.encrypt(JSON.stringify(str));
+        console.log('加密前数据:%o', str);
+        console.log('加密后数据:%o', encrypted);
+      },
       // 手动上传操作
       submitUpload() {
         // 触发自定义的上传方法 myUpload

@@ -1,4 +1,5 @@
 <template>
+<!--  <remote-js src="https://cdn.bootcss.com/jsencrypt/3.0.0-beta.1/jsencrypt.js"></remote-js>-->
   <el-container>
     <el-header style="padding: 0 0;">
 
@@ -157,7 +158,8 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+// import {mapState} from 'vuex'
+// import {JSEncrypt} from '"https://cdn.bootcss.com/jsencrypt/3.0.0-beta.1/jsencrypt.js"'
 export default {
     name: 'Message',
     data(){
@@ -204,6 +206,9 @@ export default {
       },
       // 覆盖默认的上传行为，自定义上传的实现，有几个文件就会调用这个方法几次
       myUpload(fileObj) {
+        let PUBLIC_KEY = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8HMr2CBpoZPm3t9tCVlrKtTmI4jNJc7/HhxjIEiDjC8czP4PV+44LjXvLYcSV0fwi6nE4LH2c5PBPEnPfqp0g8TZeX+bYGvd70cXee9d8wHgBqi4k0J0X33c0ZnW7JruftPyvJo9OelYSofBXQTcwI+3uIl/YvrgQRv6A5mW01QIDAQAB';
+        let encrypt = new JSEncrypt();
+
         this.$message.warning("正在上传，请耐心等候")
         let formData = new FormData();
         formData.set('key', "images/"+fileObj.file.name);
@@ -341,12 +346,14 @@ export default {
           }
         }).then(res=>{
           this.recentFriends=res.data;
-          this.activeFriend=this.recentFriends[0].id.toString();
+          // console.log(this.recentFriends)
+          if(this.recentFriends.length!==0)
+            this.activeFriend=this.recentFriends[0].id.toString();
 
           // console.log(this.activeFriend)
           this.sourceItemId=this.$route.params.itemId;
           // this.$route.params.friendId;
-          if(this.sourceItemId===null||this.sourceItemId===''){
+          if(this.sourceItemId===null||this.sourceItemId===''&&this.activeFriend>'0'){
             // this.$message.success("哦耶色")
             // console.log(this.recentFriends)
             // console.log(this.recentFriends[0])
