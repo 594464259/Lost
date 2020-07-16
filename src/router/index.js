@@ -16,7 +16,8 @@ import Upload from '@/components/user/Upload'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
+  mode: 'hash',
   routes: [
     // {
     //   path: '/',
