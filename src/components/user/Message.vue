@@ -207,7 +207,7 @@ export default {
       // 覆盖默认的上传行为，自定义上传的实现，有几个文件就会调用这个方法几次
       myUpload(fileObj) {
         let PUBLIC_KEY = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8HMr2CBpoZPm3t9tCVlrKtTmI4jNJc7/HhxjIEiDjC8czP4PV+44LjXvLYcSV0fwi6nE4LH2c5PBPEnPfqp0g8TZeX+bYGvd70cXee9d8wHgBqi4k0J0X33c0ZnW7JruftPyvJo9OelYSofBXQTcwI+3uIl/YvrgQRv6A5mW01QIDAQAB';
-        let encrypt = new JSEncrypt();
+        // let encrypt = new JSEncrypt();
 
         this.$message.warning("正在上传，请耐心等候")
         let formData = new FormData();

@@ -80,8 +80,12 @@
                 <div v-if="item.status === '-1'">
                   <el-button type="success" style="float: right">成功</el-button>
                 </div>
-                <p><a v-html="item.picture"></a></p>
+<!--                <p><a v-html="item.picture"></a></p>-->
+
+                <el-image style="float: left;margin-right:10px;width: 100px; height: 100px" :src=item.picture :fit="fit" lazy>  </el-image>
                 <small>{{item.time}}</small>
+                <p>我的证据</p>
+                <br>
                 <small>拾主: {{item.finderName}}</small>
                 <!--          <small>{{transferTime(item.time)}}</small>-->
                 <!-- <a href="javascript:void(0)" class="card-link">{{transferTime(item.time)}}</a>  -->
