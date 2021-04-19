@@ -1,41 +1,42 @@
 <template>
 <!--  <remote-js src="https://cdn.bootcss.com/jsencrypt/3.0.0-beta.1/jsencrypt.js"></remote-js>-->
-  <el-container>
-    <el-header style="padding: 0 0;">
+  <div class="page">
+<!--    <el-header style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0px 5px 0 0;">
-            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
-      </el-menu>
-    </el-header>
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--        <el-dropdown @command="handleCommand" style="float: right">-->
+<!--          <el-button type="text" style="padding: 0px 5px 0 0;">-->
+<!--            &lt;!&ndash;            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>&ndash;&gt;-->
+<!--            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>-->
+<!--          </el-button>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item command="1">编辑资料</el-dropdown-item>-->
+<!--            <el-dropdown-item command="0">退出登录</el-dropdown-item>-->
+<!--            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--&lt;!&ndash;        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>&ndash;&gt;-->
+<!--      </el-menu>-->
+<!--    </el-header>-->
+    <Navbar index="3"></Navbar>
     <el-container  style="margin: 5% 15%;height: 550px;">
       <!--aside放好友列表   header放好友名称    main放聊天内容   footer放聊天框   -->
-      <el-aside >
+      <el-aside width="30%">
         <el-col :span="24">
           <h6 style="margin: 15px 0 5px 25px;text-align: start">好友列表</h6>
           <el-divider></el-divider>
@@ -69,22 +70,22 @@
 <!--          {{this.messageRecord}}-->
 
           <div v-for="mess in messageRecord" :key="mess.id" style="">
-            <div v-if="(mess.receiver+'') === userId" style="width: 60%;text-align: start;float: left;">
+            <div v-if="(mess.receiver+'') === userId" style="width: 60%;text-align: start;float: left; margin-bottom: 12px">
               <el-col :span="3" style="">
                 <br>
                 <br>
-                <el-avatar src="http://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/friend.gif" style=" "> </el-avatar>
+                <el-avatar src="http://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/friend.gif" style=" "> </el-avatar>
               </el-col>
               <el-col :span="19">
                 <small><span style="color: red; font-weight: 700">{{currentFriend.realname}}</span> </small>
 
-                <el-card shadow="always">
+                <el-card shadow="always" style="margin-bottom: 2%">
                   {{mess.content}}
                 </el-card>
               </el-col>
             </div>
 
-            <div v-else style="width: 60%;text-align: end;float: right;">
+            <div v-else style="width: 60%;text-align: end;float: right; margin-bottom: 12px">
               <el-col :span="19">
               <small> <span style="color: red;font-weight: 700">{{userName}}</span></small>
                 <el-card shadow="always">
@@ -94,24 +95,25 @@
               <el-col :span="3">
                 <br>
                 <br>
-              <el-avatar src="http://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar>
+              <el-avatar src="http://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar>
               </el-col>
+
             </div>
           </div>
         </el-main>
-        <el-footer id="textArea" height="160px" style="padding: 0;">
+        <el-footer id="textArea" height="100px" style="padding: 2px 1px;">
 
 <!--          footer-->
 <!--          <small> <i class="el-icon-message"></i> 反馈：123456@163.com</small>-->
           <el-form ref="form" :model="form" label-width="0">
             <el-col :span="19">
             <el-form-item style="">
-              <el-input type="textarea" :rows="7"  v-model="form.content"></el-input>
+              <el-input type="textarea" :rows="4"   v-model="form.content" resize="none" style="border: none;"></el-input>
             </el-form-item>
             </el-col>
             <el-col :span="5">
               <el-form-item style="margin-top: 20%">
-                <el-button type="primary" @click="onSubmit">立即发送</el-button>
+                <el-button type="primary" @click="onSubmit" style="">立即发送</el-button>
               </el-form-item>
             <el-form-item v-show="itemFinder!==''" style="margin-top: 0">
               <el-button type="primary" @click="dialogFormVisible = true">申请认领</el-button>
@@ -154,13 +156,19 @@
         </el-footer>
       </el-container>
     </el-container>
-  </el-container>
+  </div>
 </template>
 
 <script>
 // import {mapState} from 'vuex'
 // import {JSEncrypt} from '"https://cdn.bootcss.com/jsencrypt/3.0.0-beta.1/jsencrypt.js"'
+import Navbar from '@/components/Navbar'
 export default {
+
+  //todo: BUG，输入框绑定了最新的消息框，所以输入下一个消息时，已经发送了的消息会跟着输入框变化
+  components:{
+    Navbar
+  },
     name: 'Message',
     data(){
         return{
@@ -216,7 +224,7 @@ export default {
         console.log(formData)
         this.axios({
           method:'POST',
-          url:'https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/',
+          url:'https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/',
           data: formData
         }).then(res=>{
           // console.log(res)
@@ -227,7 +235,7 @@ export default {
           this.applicationForm.itemid=this.sourceItemId
 
           console.log(this.applicationForm)
-          this.applicationForm.picture='https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name;
+          this.applicationForm.picture='https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name;
           this.axios({
             method:'POST',
             url:'api/application',
@@ -241,7 +249,7 @@ export default {
             this.$message.error("申请提交失败")
             console.log(err)
           })
-          // this.pictureUrl='https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name
+          // this.pictureUrl='https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name
         }).catch(err=>{
           this.$message.error("图片上传失败")
         })
@@ -273,28 +281,38 @@ export default {
       },
 
       onSubmit(){
-        this.form.sender=this.userId
-        this.form.receiver=this.activeFriend
+        if(this.form.content==='')
+          this.$notify({
+            title: '错误',
+            message:'请输入消息内容',
+            type: 'error'
+          });
+        else{
+          this.form.sender=this.userId
+          this.form.receiver=this.activeFriend
 
-        let temp=this.form
-        this.axios({
-          method:'POST',
-          url:'api/letter',
-          data: this.form,
-        }).then(res=>{
-          if((res.data+'')==='1'){
-            this.$notify({
-              title: '成功',
-              message: '消息发送成功，刷新页面以接收消息',
-              type: 'success'
-            });
+          let temp=this.form
+          this.axios({
+            method:'POST',
+            url:'api/letter',
+            data: this.form,
+          }).then(res=>{
+            if((res.data+'')==='1'){
+              this.$notify({
+                title: '成功',
+                message: '消息发送成功，刷新页面以接收消息',
+                type: 'success'
+              });
 
 
-            this.messageRecord=this.messageRecord.concat([temp])
+              this.messageRecord=this.messageRecord.concat([temp])
 
-            // this.form.content=''
-          }
-        })
+              // this.form.content=''
+            }
+          })
+
+        }
+
 
       },
       handleMenu(key,keyPath){

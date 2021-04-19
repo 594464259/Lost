@@ -13,11 +13,11 @@
         active-text-color="#ffd04b"
       >
         <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
+        <el-menu-item index="2">预约</el-menu-item>
+        <el-menu-item index="3">咨询</el-menu-item>
+        <el-menu-item index="4">预约结果</el-menu-item>
+        <el-menu-item index="5">个人资料</el-menu-item>
+        <el-menu-item index="6">浏览历史</el-menu-item>
         <el-dropdown @command="handleCommand" style="float: right">
           <el-button type="text" style="padding: 0px 5px 0 0;">
             <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
@@ -36,6 +36,8 @@
     <div class="container-fluid bg " >
       <h1 style="padding-top: 50px; color: #007bff;">LANDF</h1>
     </div>
+
+    <el-affix :offset="120">
     <div class="myCard fixed-left" style="float: left;">
       <div class="infoCard">
         <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">
@@ -45,6 +47,7 @@
         </ul>
       </div>
     </div>
+    </el-affix>
 
     <div id="demo" class="carousel slide fixed-right" data-ride="carousel">
 
@@ -113,7 +116,7 @@
         <!--        <p>{{item.id}}</p>-->
       </div>
     </div>
-    <el-footer id="white"></el-footer>
+    <el-footer id="white" style="background-color: transparent"></el-footer>
   </div>
 </template>
 

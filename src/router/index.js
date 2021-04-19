@@ -8,9 +8,13 @@ import AddItem from '@/components/user/AddItem'
 import Application from '@/components/user/Application'
 import Footprint from '@/components/user/Footprint'
 import Message from '@/components/user/Message'
-import my from '@/components/user/my'
+
 import Zone from '@/components/user/Zone'
-import Upload from '@/components/user/Upload'
+// import Upload from '@/components/user/Upload'
+import Test from '@/components/user/Test'
+import Course from '@/components/user/CurrentCourse'
+import Chatroom from '@/components/user/Chatroom'
+import Footer from '@/components/Footer'
 // import Index from '@/components/index'
 
 Vue.use(Router)
@@ -24,6 +28,26 @@ export default new Router({
     //   name: 'HelloWorld',
     //   component: HelloWorld
     // },
+    {
+      path:'/chat',
+      name:'Chatroom',
+      component: Chatroom
+    },
+    {
+      path: '/footer',
+      name:'Footer',
+      component: Footer
+    },
+    {
+      path:'/course',
+      name:'Course',
+      component: Course
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
+    },
     {
       path: '/zone',
       name: 'Zone',
@@ -83,16 +107,11 @@ export default new Router({
     //   name: 'OwnerManage',
     //   component: OwnerManage,
     // },
-    {
-      path: '/test',
-      name: 'test',
-      component: my,
-    },
-    {
-      path:'/up',
-      name:'up',
-      component: Upload
-    }
+    // {
+    //   path:'/up',
+    //   name:'up',
+    //   component: Upload
+    // }
 
   ]
 })

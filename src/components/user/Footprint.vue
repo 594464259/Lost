@@ -1,26 +1,26 @@
 <template>
-  <el-container>
-    <el-header style="padding: 0 0;">
+  <div class="page">
+<!--    <el-header style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-      </el-menu>
-    </el-header>
-
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--      </el-menu>-->
+<!--    </el-header>-->
+    <Navbar index="6"></Navbar>
     <div class="container-fluid footprintbg ">
       <h1 style="padding-top: 125px;">我的足迹</h1>
     </div>
@@ -44,7 +44,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="14">
+        <el-col :span="14" style="border: 1px solid transparent">
           <div class="things" style="position: relative;">
             <div class="card" v-for="(item,index) in items" :key="item.Id" style="margin-top: 30px;">
               <div class="card-body" style="text-align: start">
@@ -125,12 +125,15 @@
       </el-pagination>
     </div>
 
-  </el-container>
+
+  </div>
 </template>
 
 <script>
+  import Navbar from '@/components/Navbar'
   export default {
     name: 'Footprint',
+    components: {Navbar},
     data: function () {
       return {
         activeIndex: '6',

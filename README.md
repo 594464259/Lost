@@ -45,7 +45,7 @@ publicPath:'./'
     filename: utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
-   
+
 
 ####1.2.第二步，找到utils.js，在 第47行左右 有一个if判断为 if (options.extract),在这里面增加一行代码
 
@@ -63,6 +63,7 @@ publicPath:'../../'
 
  
 
+
 ####1.3.第三步，找到config/index.js第46行左右 修改assetsPublicPath 路径为 './';
 
 ####2.然后你就可以  build 了，
@@ -72,3 +73,7 @@ publicPath:'../../'
 ####3.1 这个就有可能是 你的路由模式  出现了问题  你给的路由模式可能是history 模式 ，这个文档说了 如果设置这个模式的话需要后端的配合 设置一些参数的 ，所以如果没有后端的配合的话 ，你就把这个路由的mode 改为 hash  或者是直接删除  就是默认的模式了
 
 
+
+##TODO
+
+upload: file rename, avoiding duplicate name

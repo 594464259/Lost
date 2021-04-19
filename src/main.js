@@ -10,6 +10,10 @@ import 'bootstrap/dist/js/bootstrap.min'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import VueJsonp from 'vue-jsonp'
+import Button from 'ant-design-vue/lib/button';
+import 'ant-design-vue/dist/antd.css';
+// import Websocket from 'ws'
+// import ElementPlus from 'element-plus'
 // import Cookies from 'js-cookie'
 // import session from 'session'
 // Vue.prototype.cookies=Cookies
@@ -41,6 +45,10 @@ import VueJsonp from 'vue-jsonp'
 // Vue.use(cors());
 Vue.use(VueJsonp)
 Vue.use(ElementUI)
+Vue.use(Button)
+// Vue.use(Websocket)
+Vue.config.productionTip = false;
+// Vue.use(EP)
 
 Vue.config.productionTip = false
 Vue.$router = router
@@ -59,6 +67,7 @@ Vue.prototype.host = 'http://8.129.163.25:8080'
 //user
 // Vue.prototype.HOST="http://locahost:8090"
 Vue.prototype.HOST = 'http://8.129.163.25:6666'
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

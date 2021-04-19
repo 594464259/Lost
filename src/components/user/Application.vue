@@ -1,39 +1,40 @@
 <template>
-  <el-container>
-    <el-header id="nav" style="padding: 0 0;">
+  <div class="page">
+<!--    <el-header id="nav" style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0 5px 0 0;">
-            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0">
-              <el-avatar :size="50"
-                         src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar>
-            </div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-menu>
-    </el-header>
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"吧-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--        <el-dropdown @command="handleCommand" style="float: right">-->
+<!--          <el-button type="text" style="padding: 0 5px 0 0;">-->
+<!--            &lt;!&ndash;            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>&ndash;&gt;-->
+<!--            <div class="block" style="float: right; margin: 5px 5px 0 0">-->
+<!--              <el-avatar :size="50"-->
+<!--                         src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar>-->
+<!--            </div>-->
+<!--          </el-button>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item command="1">编辑资料</el-dropdown-item>-->
+<!--            <el-dropdown-item command="0">退出登录</el-dropdown-item>-->
+<!--            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--      </el-menu>-->
+<!--    </el-header>-->
+    <Navbar index="4"></Navbar>
 
     <div class="container-fluid applicationbg ">
       <h1 style="padding-top: 125px; color: #FFFFFF;">历史申请记录</h1>
@@ -57,7 +58,7 @@
             </div>
           </div>
         </el-col>
-        <el-col :span="14">
+        <el-col :span="14" style="border: 1px solid transparent">
           <div class="things" style="position: relative;">
             <div class="card" v-for="item in items" :key="item.Id" style="margin-top: 30px;">
               <div class="card-body" style="text-align: start">
@@ -67,13 +68,13 @@
                      style="color:black;">{{item.itemName}}
                   </a>
                   <div v-if="item.status === 0">
-                    <el-button type="info" style="float: right" round>未审核</el-button>
+                    <el-button type="info" style="float: right" round>预约中</el-button>
                   </div>
                   <div v-else-if="item.status === -1">
-                    <el-button type="danger" style="float: right" round>未通过</el-button>
+                    <el-button type="danger" style="float: right" round>已取消</el-button>
                   </div>
                   <div v-else-if="item.status === 1">
-                    <el-button type="success" style="float: right" round>通过</el-button>
+                    <el-button type="success" style="float: right" round>预约失败</el-button>
                   </div>
                 </h3>
                 <br>
@@ -140,14 +141,19 @@
       </div>
     </el-row>
 
-  </el-container>
+  </div>
 </template>
 
 <script>
+  import Navbar from '@/components/Navbar'
   export default {
+    components:{
+      Navbar
+    },
     name: 'Application',
     data: function () {
       return {
+        fit: 'cover',
         activeIndex: '4',
         id: '',
         username: '请登录',

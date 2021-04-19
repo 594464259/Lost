@@ -17,11 +17,11 @@
     <div class="sub-cont">
       <div class="img">
         <div class="img__text m--up">
-          <h2>还未注册？</h2>
+          <h2 style="color:#d8422a">还未注册？</h2>
           <p>立即注册，发现大量机会！</p>
         </div>
         <div class="img__text m--in">
-          <h2>已有帐号？</h2>
+          <h2 style="color: #00428c;">已有帐号？</h2>
           <p>有帐号就登录吧，好久不见了！</p>
         </div>
         <div class="img__btn">
@@ -160,13 +160,18 @@
         } else {
           // console.log("gaogao")
           this.axios({
-            headers:{
-              "Access-Control-Allow-Origin": "*",
-              'Content-Type':'application/json'
-            },
+            // headers:{
+            //   "Access-Control-Allow-Origin": "*",
+            //   'Content-Type':'application/json'
+            // },
             method: 'post',
             url: '/api/login',
             data: user,
+            // url: 'http://localhost:9008/user/login',
+            // data:{
+            //   id: '1',
+            //   password: "111111"
+            // }
           }).then(res=>{
             console.log(res)
             let id=res.data
@@ -176,7 +181,7 @@
             else if(res.data > 0){
               this.$message.success("登陆成功")
               localStorage.setItem('id',res.data)
-
+              localStorage.setItem('userName',this.userForm.realName)
               // console.log(getToken())
               // session.getAttribute("USER_SESSION")
 

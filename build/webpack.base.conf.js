@@ -74,7 +74,23 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+      // {
+      //   test: /\.css$/,
+      //   //下面两行，作用相同，选择自己比较喜欢的样式即可
+      //   // use: [ 'style-loader', 'css-loader' ]
+      //   loader: 'style-loader!css-loader'
+      // },
+      // {
+      //   test: /\.less$/,
+      //   //下面两行，作用相同，选择自己比较喜欢的样式即可
+      //   // loader: 'style-loader!css-loader!less-loader'
+      //   use: [
+      //     'style-loader',
+      //     { loader: 'css-loader', options: { importLoaders: 1 } },
+      //     'less-loader'
+      //   ]
+      // },
     ]
   },
   node: {

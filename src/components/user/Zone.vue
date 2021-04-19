@@ -1,38 +1,40 @@
 <template>
-  <el-container>
-    <el-header id="nav" style="padding: 0 0;">
+  <div class="page" >
+<!--    <el-header id="nav" style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0px 5px 0 0;">
-            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
-      </el-menu>
-    </el-header>
-    <el-container style="padding: 0 10%;">
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--        <el-dropdown @command="handleCommand" style="float: right">-->
+<!--          <el-button type="text" style="padding: 0px 5px 0 0;">-->
+<!--            &lt;!&ndash;            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>&ndash;&gt;-->
+<!--            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>-->
+<!--          </el-button>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item command="1">编辑资料</el-dropdown-item>-->
+<!--            <el-dropdown-item command="0">退出登录</el-dropdown-item>-->
+<!--            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--&lt;!&ndash;        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>&ndash;&gt;-->
+<!--      </el-menu>-->
+<!--    </el-header>-->
+    <Navbar index="5"></Navbar>
+
+    <el-container style="padding: 0 12%; margin-top: -1px;" :style="{minHeight: minHeight + 'px'}">
       <!--aside放好友列表   header放好友名称    main放聊天内容   footer放聊天框   -->
 <!--      <el-aside>-->
 <!--        aside-->
@@ -95,11 +97,18 @@
         </el-footer>
       </el-container>
     </el-container>
-  </el-container>
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
+  import Navbar from '@/components/Navbar'
+  import Footer from '@/components/Footer'
   export default {
+    components:{
+      Navbar,
+      Footer
+    },
     name: 'zone',
     data(){
       var validateOld = (rule, value, callback) => {
@@ -129,10 +138,11 @@
         }
       };
       return{
+        minHeight: 0,
         dialogFormVisible: false,
         userId:'',
         activeIndex: '5',
-        defaultAvatar:'https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg',
+        defaultAvatar:'https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg',
         basic:{
           account:'',
           realName:'',
@@ -234,7 +244,7 @@
             }
             else{
               this.dialogFormVisible=false;
-              this.$message.error("修改失败")
+              this.$message.error("旧密码错误，修改失败")
             }
           })
         }
@@ -262,9 +272,20 @@
         else if(key==='6')
           this.$router.push({name:'Footprint'});
       },
+
+      countPageHeight(){
+        this.minHeight = document.documentElement.clientHeight - 120;
+        let that = this;
+        window.onresize = function () {
+          that.minHeight = document.documentElement.clientHeight - 120
+        }
+      }
     },
     mounted () {
       this.myInit();
+
+      this.countPageHeight();
+
     }
   }
 </script>

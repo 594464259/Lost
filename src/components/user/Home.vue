@@ -1,47 +1,85 @@
 <template>
-  <div class="page" >
-    <el-header id="nav" style="padding: 0 0;">
+  <div class="page">
+<!--    https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E7%99%BE%E5%B9%B4%E6%A0%A1%E5%BA%861.jpeg-->
+<!--    <div class="myHeader" id="nav" style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0px 5px 0 0;">
-<!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>
-      </el-menu>
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--&lt;!&ndash;        <el-avtar src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="float: left"></el-avtar>&ndash;&gt;-->
+<!--&lt;!&ndash;        <el-menu-item index="-1" style="font-family: 华文隶书; font-size: 20px"><el-image src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="height: 50px; width: 50px; border-radius: 2rem"></el-image> &nbsp;继续教育学院</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;        <ul><li>1234</li></ul>&ndash;&gt;-->
+<!--        <span class="nav-logo" style="position: relative; float: left;">-->
+<!--          <el-image src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="height: 52px; width: 52px; border-radius: 2rem;  margin: 2% 1px 1% 10px; display:  inline-block;vertical-align: middle;"></el-image>-->
+<!--          <span index="-1" style="font-family: 华文隶书; font-size: 20px; color: white; ">-->
+<!--            &nbsp;继续教育学院-->
+<!--          </span>-->
+<!--        </span>-->
 
-    </el-header>
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--&lt;!&ndash;        <el-divider direction="vertical"></el-divider>&ndash;&gt;-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--&lt;!&ndash;        <el-submenu index="7">&ndash;&gt;-->
+<!--&lt;!&ndash;          <template slot="title">校内站点</template>&ndash;&gt;-->
+<!--&lt;!&ndash;          <el-menu-item index="2-1">选项1</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;          <el-menu-item index="2-2">选项2</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;          <el-menu-item index="2-3">选项3</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;          <el-submenu index="2-4">&ndash;&gt;-->
+<!--&lt;!&ndash;            <template slot="title">选项4</template>&ndash;&gt;-->
+<!--&lt;!&ndash;            <el-menu-item index="2-4-1">选项1</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;            <el-menu-item index="2-4-2">选项2</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;            <el-menu-item index="2-4-3">选项3</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;          </el-submenu>&ndash;&gt;-->
+<!--&lt;!&ndash;        </el-submenu>&ndash;&gt;-->
 
-    <div class="container-fluid bg " >
-      <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
-    </div>
-<!--  </div>-->
-  <el-row :gutter="0">
+<!--        <el-dropdown @command="handleCommand" style="float: right">-->
+
+<!--          <el-button type="text" style="padding: 0px 5px 0 0; display: inline-block">-->
+<!--&lt;!&ndash;            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>&ndash;&gt;-->
+<!--            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg" ></el-avatar></div>-->
+<!--          </el-button>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item command="1">编辑资料</el-dropdown-item>-->
+<!--            <el-dropdown-item command="0">退出登录</el-dropdown-item>-->
+<!--            <el-dropdown-item command="e" disabled divided> <small style=" font-weight: bold;font-family: 微软雅黑">自强不息 止于至善</small></el-dropdown-item>-->
+<!--&lt;!&ndash;            <el-dropdown-item command="f" disabled ></el-dropdown-item>&ndash;&gt;-->
+<!--          </el-dropdown-menu>-->
+
+<!--        </el-dropdown>-->
+<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
+<!--      </el-menu>-->
+
+<!--    </div>-->
+    <Navbar index="1"></Navbar>
+
+<!--    div高度一直为351，图片高度显示不全；放缩窗口，div高度高于img-->
+  <div  style=" margin-top: -1px; ">
+    <el-carousel style="">
+      <el-carousel-item v-for="pic in XM" :key="pic.index" style=" display: flex;justify-content: center ;">
+        <el-image :src="pic.image" style="width:100%;max-width: 100%; display: -webkit-flex;vertical-align:bottom; float: left;"></el-image>
+        <!--            <h3 class="small" style="z-index: 2;">{{ pic.title }}</h3>-->
+      </el-carousel-item>
+    </el-carousel>
+  </div>
+
+  <el-row :gutter="0" style="">
+
     <div class="myContainer">
-    <el-col :span="5" style="height: 100%;">
-      <el-col :span=18 style="margin: 10% 8%;">
+
+    <el-col id="0" :span="4" style="margin-top:45px;margin-left:3%;border: 1px solid transparent">
+      <affix  :offset="40">
+      <el-col id="1" :span=18 style=" width: 90%">
         <el-menu
           default-active="1"
           class="el-menu-vertical-demo"
@@ -50,128 +88,93 @@
           @select="handleMenu"
           background-color="#545c64"
           text-color="#fff"
-          active-text-color="#ffd04b">
+          active-text-color="#ffd04b"
+          style="border-radius: 0 1rem 0 1rem;"
+          >
 
-          <el-menu-item index="1">
+          <el-menu-item index="1" style="background-color: transparent;border-radius: 0 1rem 0 0;">
             <i class="el-icon-menu"></i>
             <span slot="title">全部</span>
           </el-menu-item>
-          <el-menu-item index="2">
-            <i class="el-icon-money"></i>
-            <span slot="title">现金</span>
+          <el-menu-item index="2" style="background-color: transparent">
+            <i class="el-icon-s-opportunity"></i>
+            <span slot="title">植发</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="3" style="background-color: transparent">
             <i class="el-icon-headset"></i>
-            <span slot="title">电子</span>
+            <span slot="title">儿科</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="4" style="background-color: transparent">
             <i class="el-icon-bank-card"></i>
-            <span slot="title">证件</span>
+            <span slot="title">外科</span>
           </el-menu-item>
-          <el-menu-item index="5">
+          <el-menu-item index="5" style="background-color: transparent">
             <i class="el-icon-shopping-bag-1"></i>
-            <span slot="title">衣服</span>
+            <span slot="title">内科</span>
           </el-menu-item>
-          <el-menu-item index="6">
+          <el-menu-item index="6" style="background-color: transparent">
             <i class="el-icon-notebook-1"></i>
-            <span slot="title">文具</span>
+            <span slot="title">神经</span>
           </el-menu-item>
-          <el-menu-item index="7">
+          <el-menu-item index="7" style="background-color: transparent;border-radius: 0 0 0 1rem;">
             <i class="el-icon-loading"></i>
             <span slot="title">其他</span>
           </el-menu-item>
         </el-menu>
       </el-col>
-<!--    <div class="myCard" style=" height: 100%;">-->
-<!--      <div class="infoCard">-->
-<!--        <img src="../../assets/img/logo.png" class="rounded-circle" alt="Cinque Terre" style="height: 50px; width: 50px; align-self: center; margin-left: 30%; margin-right: 20%; ">-->
-<!--        <ul id="info">-->
-<!--            &lt;!&ndash; <p>ID:{{this.$store.state.id}}</p> &ndash;&gt;-->
-<!--            &lt;!&ndash; <p>ID: {{id}}</p> &ndash;&gt;-->
-<!--            <p>姓名：{{username}}</p>-->
-<!--            &lt;!&ndash; <p>归还：{{times}}</p> &ndash;&gt;-->
-<!--            <p>电话：{{phone}}</p>-->
-<!--        </ul>-->
-<!--      </div>-->
-<!--    </div>-->
+      </affix>
     </el-col>
-    <el-col :span="14">
-    <div class="things" style="position: relative;width: 100%">
+
+    <el-col :span="13" style="border: 1px solid transparent">
+    <div class="things" style="position: relative;width: 100%;">
       <div class="card" v-for="item in items" :key="item.Id" style="margin-top: 30px;">
-        <div class="card-body" style="text-align: start">
+        <div class="card-body" v-if="item!==null" style="text-align: start">
           <div class="category" style="float: right">类别:
-            <span v-if="item.type===1"><i class="el-icon-money"></i>现金</span>
-            <span v-if="item.type===2"><i class="el-icon-headset"></i>电子</span>
-            <span v-if="item.type===3"><i class="el-icon-bank-card"></i>证件</span>
-            <span v-if="item.type===4"><i class="el-icon-shopping-bag-1"></i>衣服</span>
-            <span v-if="item.type===5"><i class="el-icon-notebook-1"></i>文具</span>
+            <span v-if="item.type===1"><i class="el-icon-money"></i>植发</span>
+            <span v-if="item.type===2"><i class="el-icon-headset"></i>儿科</span>
+            <span v-if="item.type===3"><i class="el-icon-bank-card"></i>外科</span>
+            <span v-if="item.type===4"><i class="el-icon-shopping-bag-1"></i>内科</span>
+            <span v-if="item.type===5"><i class="el-icon-notebook-1"></i>神经</span>
             <span v-if="item.type===6"><i class="el-icon-loading"></i>其他</span>
           </div>
           <!-- <h4 class="card-title"><a href="javascript:void(0)">{{item.name}}</a></h4> -->
           <h3 class="card-titile"><a class="card-link" href="javascript:void(0)"  @click="goDetail(item.id)" style="color:black;">{{item.name}}</a></h3>
 
           <br>
-          <el-image style="float: left;margin-right:10px;width: 100px; height: 100px" :src=item.picture :fit="fit" lazy>  </el-image>
+          <el-image style="float: left;margin-right:2%;width: 100px; height: 100px;" :src=item.picture :fit="fit" lazy>  </el-image>
           <p><a v-html="item.details"></a></p>
           <br>
           <br>
           <br>
-          <small>{{item.time}}</small>
+          <small style="float: right">{{transferTime(item.time)}}</small>
 <!--          <small>{{transferTime(item.time)}}</small>-->
           <!-- <a href="javascript:void(0)" class="card-link">{{transferTime(item.time)}}</a>  -->
           <!-- <a href="javascript:void(0)" class="card-link">{{item.thingid}}</a> -->
 
         </div>
-      </div>
-    </div>
-    </el-col>
-    <el-col :span="5">
-    <div id="demo" class="carousel slide" data-ride="carousel" style="">
-
-
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-      </ul>
-
-
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="https://static.runoob.com/images/mix/img_fjords_wide.jpg">
-          <div class="carousel-caption">
-            <h3>LANDF</h3>
-            <p>Thanks</p>
-          </div>
-        </div>D
-        <div class="carousel-item">
-          <img src="https://static.runoob.com/images/mix/img_nature_wide.jpg">
-          <div class="carousel-caption">
-            <h3>拾取东西？</h3>
-            <p>遗失</p>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img src="https://static.runoob.com/images/mix/img_mountains_wide.jpg">
-          <div class="carousel-caption">
-            <h3>弄丢物品？</h3>
-            <p>寻找</p>
-          </div>
-        </div>
+<!--        <div class="card-body" v-if="item===''" style="text-align: start">-->
+<!--          <span>NULL</span>-->
+<!--          <span>abc</span>-->
+<!--        </div>-->
       </div>
 
-
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
 
     </div>
     </el-col>
 
-</div>
+      <el-col :span="4" style="margin-top: 45px; margin-left: 2% ; position: sticky;float: top;width: 20%; ">
+        <affix :offset="55">
+<!--        <span class="demonstration">Click 指示器触发</span>-->
+        <el-carousel  >
+          <el-carousel-item v-for="pic in titles" :key="pic.title" style="z-index: 1">
+            <el-image :src="pic.image" style="border-radius: 0.5rem"></el-image>
+<!--            <h3 class="small" style="z-index: 2;">{{ pic.title }}</h3>-->
+          </el-carousel-item>
+        </el-carousel>
+        </affix>
+      </el-col>
+
+  </div>
   </el-row>
     <div class="footer">
       <el-pagination
@@ -190,7 +193,13 @@
 
 <script>
 // import {mapState} from 'vuex'
+import Affix from '@/components/Affix';
+import Navbar from '@/components/Navbar'
   export default {
+    components: {
+      Affix,
+      Navbar
+    },
     name: 'Home',
     data:function () {
       return{
@@ -205,6 +214,36 @@
         limit: 5,
 
         currentPage:1,
+
+
+        XM:[
+          {
+            index:1,
+            image:"https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E7%99%BE%E5%B9%B4%E6%A0%A1%E5%BA%861.jpeg"
+          },
+          {
+            index:2,
+            image:"https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/百年校庆2.jpeg"
+          }
+
+        ],
+        titles:[
+          {
+            title:"XM",
+            image:"https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E8%BD%AE%E6%92%AD/d774961bae2ddbc68993b1dfea6e1c3d.jpeg"
+          },
+
+          {
+            title:"DSB",
+            image:"https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E8%BD%AE%E6%92%AD/62aa517d9d16212d9823ce84d043de43.jpeg"
+          },
+
+          {
+            title:"爪八",
+            image:"https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E8%BD%AE%E6%92%AD/215edeb56dfa241ca54ad2b6644dacf9.jpeg"
+          }
+        ],
+
       }
     },
     methods:{
@@ -315,8 +354,20 @@
         this.$router.push({name:'Zone'})
       },
       transferTime:function(cTime){
-
+        // return cTime;
+        let DateString = cTime.toString()
+        let cDate = new Date(DateString);
+        // 注意js里面的getMonth是从0开始的
+        let FormattedDateTime =
+          cDate.getFullYear() + '年' +
+          (cDate.getMonth() + 1) + '月' +
+          cDate.getDate() + '日 ' +
+          cDate.getHours() + ':' +
+          cDate.getMinutes() + ':' +
+          cDate.getSeconds();
+        return FormattedDateTime;
        // var jsonDate = new Date(parseInt(cTime));
+       // console.log(jsonDate)
        // Date.prototype.format = function (format){
        //       var  o = {
        //            "y+": this.getFullYear(),
@@ -343,6 +394,11 @@
     }
 
     },
+    computed: {
+      indexs() {
+        this.activeIndex=this.index;
+      }
+      },
     mounted(){
       this.myInit()
     },
@@ -371,8 +427,9 @@ html{
   .bg {
     margin-top: -5px;
     width: 100%;
-    height: 250px;
-    background:url("../../images/bg.jpg") no-repeat center;
+    height: 425px;
+    min-height: 33%;
+    background:url("https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/%E7%99%BE%E5%B9%B4%E6%A0%A1%E5%BA%861.jpeg") no-repeat center;
     background-size:cover;
   }
   #demo{
@@ -428,4 +485,10 @@ html{
     line-height: 0px;
   }
 
+  .nav-logo:focus{
+    outline: none;
+  }
+
+
 </style>
+

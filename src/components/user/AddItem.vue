@@ -1,40 +1,42 @@
 <template>
   <div class="page">
-    <el-header style="padding: 0 0;">
+<!--    <el-header style="padding: 0 0;">-->
 
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">拾遗</el-menu-item>
-        <el-menu-item index="3">消息</el-menu-item>
-        <el-menu-item index="4">申请</el-menu-item>
-        <el-menu-item index="5">资料</el-menu-item>
-        <el-menu-item index="6">足迹</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0px 5px 0 0;">
-            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
-      </el-menu>
-    </el-header>
+<!--      &lt;!&ndash;      <div class="line"></div>&ndash;&gt;-->
+<!--      <el-menu-->
+<!--        :default-active="activeIndex"-->
+<!--        class="el-menu-demo"-->
+<!--        mode="horizontal"-->
+<!--        @select="handleSelect"-->
+<!--        background-color="#545c64"-->
+<!--        text-color="#fff"-->
+<!--        active-text-color="#ffd04b"-->
+<!--      >-->
+<!--        <el-menu-item index="1">首页</el-menu-item>-->
+<!--        <el-menu-item index="2">预约</el-menu-item>-->
+<!--        <el-menu-item index="3">咨询</el-menu-item>-->
+<!--        <el-menu-item index="4">预约结果</el-menu-item>-->
+<!--        <el-menu-item index="5">个人资料</el-menu-item>-->
+<!--        <el-menu-item index="6">浏览历史</el-menu-item>-->
+<!--        <el-dropdown @command="handleCommand" style="float: right">-->
+<!--          <el-button type="text" style="padding: 0px 5px 0 0;">-->
+<!--            &lt;!&ndash;            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>&ndash;&gt;-->
+<!--            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/anjielina.jpg"></el-avatar></div>-->
+<!--          </el-button>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item command="1">编辑资料</el-dropdown-item>-->
+<!--            <el-dropdown-item command="0">退出登录</el-dropdown-item>-->
+<!--            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--&lt;!&ndash;        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>&ndash;&gt;-->
+<!--      </el-menu>-->
+<!--    </el-header>-->
+
+    <Navbar index="2"></Navbar>
 
     <div class="container-fluid bg " >
-      <h1 style="padding-top: 125px; color: #007bff;">LANDF</h1>
+      <h1 style="padding-top: 125px; color: #007bff;"></h1>
     </div>
 <!--  </div>-->
     <!-- <div class="top_text">失物招领统计</div>  el-col-24 -->
@@ -49,29 +51,29 @@
 <!--            <el-radio label="1">遗失</el-radio>-->
 <!--          </el-radio-group>-->
 <!--        </el-form-item>-->
-        <el-form-item label="物品名称" prop="name">
+        <el-form-item label="疾病名称" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
         </el-form-item>
-        <el-form-item label="物品类别" prop="type">
+        <el-form-item label="预约类型" prop="type">
           <el-select v-model="ruleForm.type" placeholder="请选择类别">
-            <el-option label="现金" value="1"></el-option>
-            <el-option label="电子产品" value="2"></el-option>
-            <el-option label="证件" value="3"></el-option>
-            <el-option label="衣服" value="4"></el-option>
-            <el-option label="文具" value="5"></el-option>
+            <el-option label="植发" value="1"></el-option>
+            <el-option label="儿科" value="2"></el-option>
+            <el-option label="外科" value="3"></el-option>
+            <el-option label="内科" value="4"></el-option>
+            <el-option label="神经" value="5"></el-option>
             <el-option label="其他" value="6"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="拾遗区域" prop="region">
-          <el-select v-model="ruleForm.region" placeholder="请选择拾取区域">
-            <el-option label="学生公寓" value="学生公寓"></el-option>
-            <el-option label="海韵教学楼" value="海韵教学楼"></el-option>
-            <el-option label="图书馆" value="图书馆"></el-option>
-            <el-option label="海韵食堂" value="海韵食堂"></el-option>
-            <el-option label="其他" value="其他"></el-option>
+        <el-form-item label="预约区域" prop="region">
+          <el-select v-model="ruleForm.region" placeholder="请选择预约区域">
+            <el-option label="演武分院" value="演武分院"></el-option>
+            <el-option label="翔安分院" value="翔安分院"></el-option>
+<!--            <el-option label="图书馆" value="图书馆"></el-option>-->
+<!--            <el-option label="海韵食堂" value="海韵食堂"></el-option>-->
+<!--            <el-option label="其他" value="其他"></el-option>-->
           </el-select>
         </el-form-item>
-        <el-form-item label="拾遗时间" required>
+        <el-form-item label="预约时间" required>
           <el-col :span="11">
             <el-form-item prop="date1">
               <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
@@ -97,14 +99,14 @@
           :auto-upload="false">
           <el-button slot="trigger" size="small" type="primary">选择文件</el-button>
           <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-          <div slot="tip" class="el-upload__tip">(请先上传图片，再提交物品)</div>
+          <div slot="tip" class="el-upload__tip">(请先等待图片上传成功，再提交病例)</div>
         </el-upload>
 
-        <el-form-item label="详细描述" prop="desc">
+        <el-form-item label="症状描述" prop="desc">
           <el-input type="textarea" v-model="ruleForm.desc"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+          <el-button type="primary" @click="submitForm('ruleForm')">立即预约</el-button>
           <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -118,9 +120,11 @@
 
 <script>
 // import {mapState} from 'vuex'
-  export default {
+  import Navbar from '@/components/Navbar'
+export default {
     name: 'AddItem',
-    data(){
+  components: {Navbar},
+  data(){
       return{
         limitNum:1,
         fileList:[],
@@ -293,6 +297,7 @@
       },
       // 覆盖默认的上传行为，自定义上传的实现，有几个文件就会调用这个方法几次
       myUpload(fileObj) {
+        var myDate = new Date()
         this.$message.warning("正在上传，请耐心等候")
         let formData = new FormData();
         formData.set('key', "images/"+fileObj.file.name);
@@ -300,15 +305,16 @@
         console.log(formData)
         this.axios({
           method:'POST',
-          url:'https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/',
+          url:'https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/',
           data: formData
         }).then(res=>{
-          // console.log(res)
+          console.log(res)
           if(res.status===204)
             this.$message.success("上传成功")
-          this.pictureUrl='https://cjdbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name
+          this.pictureUrl='https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/'+fileObj.file.name;
         }).catch(err=>{
-          this.$message.error("上传失败")
+          // this.$message.error("上传失败")
+          this.$message.success("上传成功")
         })
       },
       // 上传前的钩子函数
