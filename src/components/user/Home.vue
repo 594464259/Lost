@@ -75,18 +75,18 @@
 
   <el-row :gutter="0" style="">
 
-    <div class="myContainer">
+    <div class="myContainer" style="min-width: 750px;">
 
-    <el-col id="0" :span="4" style="margin-top:45px;margin-left:3%;border: 1px solid transparent">
-      <affix  :offset="40">
-      <el-col id="1" :span=18 style=" width: 90%">
+    <el-col id="0" :span="4" style="margin-top:45px;margin-left:3%;border: 1px solid transparent;min-width: 120px;">
+      <affix  :offset="20">
+      <el-col id="1" :span=18 style=" width: 90%; ">
         <el-menu
           default-active="1"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
           @select="handleMenu"
-          background-color="#545c64"
+          background-color="#1e2228"
           text-color="#fff"
           active-text-color="#ffd04b"
           style="border-radius: 0 1rem 0 1rem;"
@@ -162,7 +162,7 @@
     </div>
     </el-col>
 
-      <el-col :span="4" style="margin-top: 45px; margin-left: 2% ; position: sticky;float: top;width: 20%; ">
+      <el-col :span="4" style="margin-top: 45px; margin-left: 2% ; position: sticky;float: top;width: 20%;min-width: 150px; ">
         <affix :offset="55">
 <!--        <span class="demonstration">Click 指示器触发</span>-->
         <el-carousel  >
@@ -181,9 +181,10 @@
       @current-change="changePage"
         background
         layout="prev, pager, next"
-        :total="100" style="height: 100%;">
+        :total="100" style="height: 100%; ">
       </el-pagination>
     </div>
+    <Footer></Footer>
 
 <!--    回到顶部-->
 <!--    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>-->
@@ -193,12 +194,14 @@
 
 <script>
 // import {mapState} from 'vuex'
+import Footer from '@/components/Footer'
 import Affix from '@/components/Affix';
 import Navbar from '@/components/Navbar'
   export default {
     components: {
       Affix,
-      Navbar
+      Navbar,
+      Footer
     },
     name: 'Home',
     data:function () {

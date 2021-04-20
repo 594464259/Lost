@@ -14,7 +14,8 @@ import Zone from '@/components/user/Zone'
 import Test from '@/components/user/Test'
 import Course from '@/components/user/CurrentCourse'
 import Chatroom from '@/components/user/Chatroom'
-import Footer from '@/components/Footer'
+import Profile from '@/components/ProfileBox'
+// import Footer from '@/components/Footer'
 // import Index from '@/components/index'
 
 Vue.use(Router)
@@ -29,14 +30,14 @@ export default new Router({
     //   component: HelloWorld
     // },
     {
+      path:'/profile',
+      name:'Profile',
+      component:Profile
+    },
+    {
       path:'/chat',
       name:'Chatroom',
       component: Chatroom
-    },
-    {
-      path: '/footer',
-      name:'Footer',
-      component: Footer
     },
     {
       path:'/course',

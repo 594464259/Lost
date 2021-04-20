@@ -1,38 +1,6 @@
 <template>
   <div class="page" >
-    <el-header style="padding: 0 0;">
-
-      <!--      <div class="line"></div>-->
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b"
-      >
-        <el-menu-item index="1">首页</el-menu-item>
-        <el-menu-item index="2">预约</el-menu-item>
-        <el-menu-item index="3">咨询</el-menu-item>
-        <el-menu-item index="4">预约结果</el-menu-item>
-        <el-menu-item index="5">个人资料</el-menu-item>
-        <el-menu-item index="6">浏览历史</el-menu-item>
-        <el-dropdown @command="handleCommand" style="float: right">
-          <el-button type="text" style="padding: 0px 5px 0 0;">
-            <!--            更多菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-            <div class="block" style="float: right; margin: 5px 5px 0 0"><el-avatar :size="50" src="http://img1.imgtn.bdimg.com/it/u=1821568931,2238465560&fm=15&gp=0.jpg"></el-avatar></div>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑资料</el-dropdown-item>
-            <el-dropdown-item command="0">退出登录</el-dropdown-item>
-            <el-dropdown-item command="e" disabled divided>GL&HF</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-<!--        <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>-->
-      </el-menu>
-    </el-header>
-
+    <Navbar></Navbar>
     <div class="container-fluid bg " >
       <h1 style="padding-top: 50px; color: #007bff;">LANDF</h1>
     </div>
@@ -116,13 +84,20 @@
         <!--        <p>{{item.id}}</p>-->
       </div>
     </div>
-    <el-footer id="white" style="background-color: transparent"></el-footer>
+<!--    <el-footer id="white" style="background-color: transparent"></el-footer>-->
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
+import Navbar from '@/components/Navbar'
+import Footer from  '@/components/Footer'
   export default {
+  components:{
+    Navbar,
+    Footer
+  },
     name: 'Detail',
     data:function () {
       return{

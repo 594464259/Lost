@@ -35,8 +35,7 @@
 
     <Navbar index="2"></Navbar>
 
-    <div class="container-fluid bg " >
-      <h1 style="padding-top: 125px; color: #007bff;"></h1>
+    <div class="container-fluid bg " style="display: block" >
     </div>
 <!--  </div>-->
     <!-- <div class="top_text">失物招领统计</div>  el-col-24 -->
@@ -112,8 +111,9 @@
       </el-form>
 
     </div>
-  </div>
 
+  </div>
+    <Footer></Footer>
 
   </div>
 </template>
@@ -121,9 +121,10 @@
 <script>
 // import {mapState} from 'vuex'
   import Navbar from '@/components/Navbar'
+import Footer from '@/components/Footer'
 export default {
     name: 'AddItem',
-  components: {Navbar},
+  components: {Navbar, Footer},
   data(){
       return{
         limitNum:1,
@@ -360,7 +361,6 @@ export default {
     align-items: center;
   }
   .bg {
-    margin-top: -5px;
     width: 100%;
     height: 250px;
     background:url("../../images/bg.jpg") no-repeat center;

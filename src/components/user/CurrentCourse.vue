@@ -1,14 +1,20 @@
 <template>
-  <Navbar index="2">
+  <div class="page">
+    <Navbar index="2">
 
-  </Navbar>
+    </Navbar>
+
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
   import Navbar from '@/components/Navbar'
+  import Footer from '@/components/Footer'
   export default {
     components:{
-      Navbar
+      Navbar,
+      Footer
     },
     name: 'CurrentCourse'
   }

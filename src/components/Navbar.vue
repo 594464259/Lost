@@ -1,5 +1,5 @@
 <template>
-  <div class="myHeader" id="nav" style="padding: 0 0;">
+  <div class="myHeader" id="nav" style="padding: 0 0; display: block; min-width: 960px">
 
     <!--      <div class="line"></div>-->
     <el-menu
@@ -10,13 +10,15 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
+      style="height: 61px"
     >
       <!--        <el-avtar src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="float: left"></el-avtar>-->
       <!--        <el-menu-item index="-1" style="font-family: 华文隶书; font-size: 20px"><el-image src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="height: 50px; width: 50px; border-radius: 2rem"></el-image> &nbsp;继续教育学院</el-menu-item>-->
       <!--        <ul><li>1234</li></ul>-->
       <span class="nav-logo" style="position: relative; float: left;">
           <el-image src="https://lpcbucket.obs.cn-north-4.myhuaweicloud.com/images/XM.jpg" style="height: 52px; width: 52px; border-radius: 2rem;  margin: 2% 1px 1% 10px; display:  inline-block;vertical-align: middle;"></el-image>
-          <span index="-1" style="font-family: 华文隶书; font-size: 20px; color: white; ">
+<!--        <span style="color:#f1f1f1; font-size: 18px">廈門大學</span>-->
+        <span index="-1" style="font-family: 华文隶书; font-size: 20px; color: white; ">
             &nbsp;继续教育学院
           </span>
         </span>
@@ -40,7 +42,7 @@
       <!--            <el-menu-item index="2-4-3">选项3</el-menu-item>-->
       <!--          </el-submenu>-->
       <!--        </el-submenu>-->
-
+    <div style="display: block; color: #545c64">
       <el-dropdown @command="handleCommand" style="float: right">
 
         <el-button type="text" style="padding: 0px 5px 0 0; display: inline-block">
@@ -56,6 +58,7 @@
 
       </el-dropdown>
       <el-menu-item disabled style="float: right;">Welcome Back, {{this.username}}</el-menu-item>
+    </div>
     </el-menu>
 
   </div>

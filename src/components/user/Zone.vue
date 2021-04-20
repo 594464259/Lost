@@ -274,10 +274,10 @@
       },
 
       countPageHeight(){
-        this.minHeight = document.documentElement.clientHeight - 120;
+        this.minHeight = document.documentElement.clientHeight - 20;
         let that = this;
         window.onresize = function () {
-          that.minHeight = document.documentElement.clientHeight - 120
+          that.minHeight = document.documentElement.clientHeight - 20
         }
       }
     },
